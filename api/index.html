@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skinca — Your skin, globally curated.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F0EB;
+    --bg2: #EDE5DA;
+    --surface: #FFFFFF;
+    --teal: #1D6B5E;
+    --teal-light: #E0F0ED;
+    --teal-mid: #2A8A7A;
+    --nude: #C8A882;
+    --nude-light: #EDE5DA;
+    --text: #1A1A18;
+    --text-mid: #5A5248;
+    --text-soft: #9A8F85;
+    --border: #DDD6CE;
+    --blush: #D4537E;
+    --amber: #F0C97A;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow: 0 2px 20px rgba(26,26,24,0.06);
+    --shadow-lg: 0 8px 40px rgba(26,26,24,0.10);
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  /* ── LAYOUT ── */
+  .app {
+    display: flex;
+    height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    flex-direction: column;
+    background: var(--bg);
+    position: relative;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .header-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--teal-light);
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .header-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── WELCOME SCREEN ── */
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 40px 32px;
+    text-align: center;
+    gap: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .welcome-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(29,107,94,0.25);
+  }
+
+  .welcome-icon svg { width: 32px; height: 32px; }
+
+  .welcome h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+
+  .welcome h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .welcome p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+
+  .welcome-hints {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hint {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text-mid);
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .hint:hover {
+    background: var(--teal-light);
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .hint-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .start-btn {
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(29,107,94,0.25);
+  }
+
+  .start-btn:hover {
+    background: var(--teal-mid);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(29,107,94,0.3);
+  }
+
+  /* ── CHAT AREA ── */
+  .chat-area {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .chat-area.active { display: flex; }
+
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 20px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+  }
+
+  .messages::-webkit-scrollbar { width: 4px; }
+  .messages::-webkit-scrollbar-track { background: transparent; }
+  .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── MESSAGES ── */
+  .msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+    animation: msgIn 0.3s ease both;
+  }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg.ai { align-self: flex-start; }
+  .msg.user { align-self: flex-end; }
+
+  .msg-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: white;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-bottom: 4px;
+  }
+
+  .msg-bubble {
+    padding: 12px 14px;
+    border-radius: 16px;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  .msg.ai .msg-bubble {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-top-left-radius: 4px;
+    box-shadow: var(--shadow);
+  }
+
+  .msg.user .msg-bubble {
+    background: var(--teal);
+    color: white;
+    border-top-right-radius: 4px;
+  }
+
+  /* image preview in message */
+  .msg-image {
+    max-width: 200px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  /* typing indicator */
+  .typing {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    border-top-left-radius: 4px;
+    width: fit-content;
+    box-shadow: var(--shadow);
+  }
+
+  .typing-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-soft);
+    animation: typingBounce 1.2s infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* ── INPUT AREA ── */
+  .input-area {
+    padding: 12px 16px 24px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .photo-preview-wrap {
+    display: none;
+    margin-bottom: 8px;
+    position: relative;
+    width: fit-content;
+  }
+
+  .photo-preview-wrap.active { display: block; }
+
+  .photo-preview {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--teal);
+  }
+
+  .photo-remove {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--text);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 8px 8px 8px 14px;
+    transition: border-color 0.2s;
+    box-shadow: var(--shadow);
+  }
+
+  .input-row:focus-within {
+    border-color: var(--teal);
+  }
+
+  .chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    resize: none;
+    max-height: 100px;
+    line-height: 1.5;
+    min-height: 24px;
+  }
+
+  .chat-input::placeholder {
+    color: var(--text-soft);
+  }
+
+  .photo-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--nude-light);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    color: var(--nude);
+  }
+
+  .photo-btn:hover {
+    background: var(--nude);
+    color: white;
+  }
+
+  .send-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .send-btn:hover { background: var(--teal-mid); transform: scale(1.05); }
+  .send-btn:disabled { background: var(--border); cursor: not-allowed; transform: none; }
+
+  .photo-hint {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-soft);
+    margin-top: 8px;
+  }
+
+  .photo-hint span {
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    text-align: center;
+    font-size: 10px;
+    color: var(--text-soft);
+    padding: 6px 24px 0;
+  }
+
+  /* ── HIDDEN FILE INPUT ── */
+  #fileInput { display: none; }
+
+  /* ── QUICK REPLY CHIPS ── */
+  .quick-replies {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .chip {
+    background: var(--teal-light);
+    color: var(--teal);
+    border: 1px solid rgba(29,107,94,0.2);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .chip:hover {
+    background: var(--teal);
+    color: white;
+  }
+
+  /* ── API KEY SETUP ── */
+  .api-setup {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,24,0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 24px;
+  }
+
+  .api-card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 28px 24px;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .api-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .api-card p {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .api-input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 12px;
+    background: var(--bg);
+  }
+
+  .api-input:focus { border-color: var(--teal); }
+
+  .api-save-btn {
+    width: 100%;
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .api-save-btn:hover { background: var(--teal-mid); }
+
+  .api-note {
+    font-size: 11px;
+    color: var(--text-soft);
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ── MOBILE ── */
+  @media (min-width: 480px) {
+    .app {
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- API key managed server-side -->
+
+<div class="app">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">Skinca</div>
+    <div class="header-badge">AI Advisor</div>
+  </div>
+
+  <!-- Welcome Screen -->
+  <div class="welcome" id="welcomeScreen">
+    <div class="welcome-icon">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 6C10.477 6 6 10.477 6 16C6 21.523 10.477 26 16 26C21.523 26 26 21.523 26 16C26 10.477 21.523 6 16 6Z" stroke="white" stroke-width="1.5" fill="none"/>
+        <path d="M12 16.5C12.5 18 14 19.5 16 19.5C18 19.5 19.5 18 20 16.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="13" cy="14" r="1" fill="white"/>
+        <circle cx="19" cy="14" r="1" fill="white"/>
+      </svg>
+    </div>
+    <div>
+      <h1>Your skin,<br><em>globally curated.</em></h1>
+    </div>
+    <p>Tell me about your skin concerns and I'll find the best products from around the world — just for you.</p>
+    <div class="welcome-hints">
+      <div class="hint" onclick="useHint(this)">
+        <span class="hint-icon">🌿</span>
+        <span>"My skin is dry overall but gets oily in the T-zone. I have red marks on my temples."</span>
+      </div>
+      <div class="hint" onclick="useHint(this)">
+        <span class="hint-icon">📸</span>
+        <span>"Attach a photo for a more precise skin read from the AI."</span>
+      </div>
+      <div class="hint" onclick="useHint(this)">
+        <span class="hint-icon">🧴</span>
+        <span>"Tell me what products you're currently using for a compatibility check."</span>
+      </div>
+    </div>
+    <button class="start-btn" onclick="startChat()">Start my skin consult →</button>
+  </div>
+
+  <!-- Chat Area -->
+  <div class="chat-area" id="chatArea">
+    <div class="messages" id="messages"></div>
+    <div class="input-area">
+      <div class="photo-preview-wrap" id="photoPreviewWrap">
+        <img class="photo-preview" id="photoPreview" src="" alt="Photo">
+        <button class="photo-remove" onclick="removePhoto()">✕</button>
+      </div>
+      <div class="input-row">
+        <textarea class="chat-input" id="chatInput" placeholder="Tell me about your skin... you can attach a photo too." rows="1"
+          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="photo-btn" onclick="document.getElementById('fileInput').click()" title="Attach photo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </button>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+      <div class="disclaimer">
+        Skinca is an advisory service, not a medical provider. <br>Consult a dermatologist for medical concerns.
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="fileInput" accept="image/*" onchange="handlePhoto(event)">
+
+<script>
+// ── SYSTEM PROMPT ──
+const SYSTEM_PROMPT = `You are Skinca AI, a global skin and beauty advisor built into the Skinca app.
+
+Your expertise combines:
+- Dermatology knowledge — skin physiology, conditions, active ingredients, barrier function
+- Global beauty curation — K-beauty, French pharmacy, US prestige, J-beauty, Middle Eastern beauty
+- Home care protocols — LED devices, RF/EMS, microcurrent, home peeling, dermaplaning, gua sha, dermarolling
+- Ingredient science — actives, pH compatibility, layering order, contraindications
+- Zone-specific care — overall skin + specific problem areas with targeted layering
+- Real-world product knowledge — actual texture, feel, absorption, and user experience
+
+Your personality:
+- Warm and knowledgeable — like a trusted friend who happens to be a skin expert
+- Direct and honest — never oversell, never overpromise
+- Curious and precise — ask smart questions to narrow down exactly what's happening
+- Globally minded — across brands and borders
+- Honest about limits — say so when you're not sure
+
+TONE: Write like a knowledgeable friend, not a medical report. Use soft observational language: "~처럼 보여요", "this looks like...", "this appears to be...". Never use declarative diagnosis. Explain technical terms in plain language immediately.
+
+CONSULTATION FLOW:
+1. Listen first — let user describe freely before recommending
+2. Ask ONE question at a time (STRICT — never two questions in one message)
+3. Priority: clarify ambiguous symptoms first → shopping country → texture preference → routine depth
+4. Analyze clearly with warm observational language
+5. Recommend with ingredient rationale + real texture feel
+
+CLARIFICATION RULE: Never jump to conclusions from vague descriptions.
+- "Red marks" → ask about color (pink/red vs brown/dark), texture (smooth vs uneven), duration
+- "Breakouts" → ask what type (whitehead, blackhead, cystic, papule)
+- "Sensitive skin" → ask when and where it reacts
+- After 2 rounds still unclear → suggest photo: "If you can share a photo, I'll be able to give you a much more accurate read."
+
+PHOTO: When a photo is attached, analyze it FIRST before asking anything. Comment on: texture, tone/discoloration (PIE vs PIH), active concerns, barrier state, zone differences. Always add: "Photos give me a good read, but for anything that looks medical, a dermatologist in person is always more accurate."
+
+TEXTURE RULES:
+- If user stated texture preference → filter recommendations immediately
+- If user hasn't mentioned → flag notable texture when recommending and ask: "This one is quite rich and a little slow to absorb — does that work for you, or would you prefer something lighter?"
+
+PACKAGING: If 2-3 products are genuinely similar in efficacy, ask packaging preference (jar vs tube vs pump). Only ask when options are truly equivalent.
+
+PRODUCT ACCURACY: Never guess product details. If unsure: "I want to make sure I give you accurate info — could you check the key ingredients on the back?"
+
+HOME CARE SCOPE (all within scope, excluding medical procedures):
+Dehydration, dryness, barrier repair, oiliness, pores, PIE, PIH, melasma (home component), uneven tone, fine lines, acne (mild-moderate), fungal acne, texture, sensitivity, and all home devices (LED, RF/EMS, microcurrent, dermaroller, home peeling, dermaplaning, gua sha).
+
+GLOBAL MARKETS:
+- US: Sephora, Amazon, Ulta, Target, Dermstore
+- Korea: Olive Young, Musinsa Beauty, Coupang
+- Japan: @Cosme, Cosme Kitchen, Amazon JP
+- France/EU: Pharmacies, Sephora FR, Lookfantastic EU
+- Middle East: Sephora ME, Namshi, noon
+
+NEVER: diagnose medical conditions, recommend prescriptions, guarantee results, ask two questions at once, guess product details, introduce devices before base routine is set, say only "see a doctor" without interim home care.
+
+DISCLAIMER (include naturally when relevant): "I'm not a substitute for a dermatologist — if something looks like it needs medical attention, please get it checked in person."`;
+
+// ── STATE ──
+let conversationHistory = [];
+let selectedImageBase64 = null;
+let selectedImageType = null;
+let isLoading = false;
+
+// ── INIT ──
+window.onload = () => {
+  // API key managed server-side via Vercel environment variables
+};
+
+
+
+// ── WELCOME → CHAT ──
+function startChat() {
+  document.getElementById('welcomeScreen').style.display = 'none';
+  document.getElementById('chatArea').classList.add('active');
+  addAIMessage("Hi! I'm your Skinca advisor. Tell me about your skin — what's been bothering you, what you're currently using, and where you're shopping from. You can attach a photo too if that helps. 📸", []);
+  document.getElementById('chatInput').focus();
+}
+
+function useHint(el) {
+  if (el.querySelector('span:last-child').textContent.includes('Attach')) return;
+  startChat();
+}
+
+// ── MESSAGES ──
+function addAIMessage(text, chips = []) {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = 'S';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.innerHTML = formatText(text);
+
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+
+  if (chips && chips.length > 0) {
+    const chipWrap = document.createElement('div');
+    chipWrap.className = 'quick-replies';
+    chips.forEach(c => {
+      const chip = document.createElement('button');
+      chip.className = 'chip';
+      chip.textContent = c;
+      chip.onclick = () => {
+        document.getElementById('chatInput').value = c;
+        chipWrap.remove();
+        sendMessage();
+      };
+      chipWrap.appendChild(chip);
+    });
+    div.appendChild(chipWrap);
+  }
+
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function addUserMessage(text, imageBase64, imageType) {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg user';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+
+  if (imageBase64) {
+    const img = document.createElement('img');
+    img.src = `data:${imageType};base64,${imageBase64}`;
+    img.className = 'msg-image';
+    bubble.appendChild(img);
+  }
+
+  if (text) {
+    const p = document.createElement('p');
+    p.style.margin = '0';
+    p.textContent = text;
+    bubble.appendChild(p);
+  }
+
+  div.appendChild(bubble);
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function addTyping() {
+  const messages = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+  div.id = 'typingIndicator';
+
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = 'S';
+
+  const typing = document.createElement('div');
+  typing.className = 'typing';
+  typing.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+
+  div.appendChild(avatar);
+  div.appendChild(typing);
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return div;
+}
+
+function formatText(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+
+// ── PHOTO ──
+function handlePhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const base64 = e.target.result.split(',')[1];
+    const type = file.type;
+    selectedImageBase64 = base64;
+    selectedImageType = type;
+
+    const preview = document.getElementById('photoPreview');
+    preview.src = e.target.result;
+    document.getElementById('photoPreviewWrap').classList.add('active');
+  };
+  reader.readAsDataURL(file);
+  event.target.value = '';
+}
+
+function removePhoto() {
+  selectedImageBase64 = null;
+  selectedImageType = null;
+  document.getElementById('photoPreviewWrap').classList.remove('active');
+  document.getElementById('photoPreview').src = '';
+}
+
+// ── SEND ──
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+async function sendMessage() {
+  if (isLoading) return;
+
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text && !selectedImageBase64) return;
+
+  isLoading = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  // Add user message to UI
+  addUserMessage(text, selectedImageBase64, selectedImageType);
+
+  // Build message content for API
+  const userContent = [];
+  if (selectedImageBase64) {
+    userContent.push({
+      type: 'image',
+      source: {
+        type: 'base64',
+        media_type: selectedImageType,
+        data: selectedImageBase64
+      }
+    });
+  }
+  if (text) {
+    userContent.push({ type: 'text', text });
+  }
+
+  // Add to history
+  conversationHistory.push({ role: 'user', content: userContent });
+
+  // Clear input
+  input.value = '';
+  input.style.height = 'auto';
+  removePhoto();
+
+  // Show typing
+  const typing = addTyping();
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 1024,
+        system: SYSTEM_PROMPT,
+        messages: conversationHistory
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+      throw new Error(data.error.message);
+    }
+
+    const aiText = data.content[0].text;
+
+    // Add to history
+    conversationHistory.push({ role: 'assistant', content: aiText });
+
+    // Remove typing, add response
+    typing.remove();
+    addAIMessage(aiText);
+
+  } catch (err) {
+    typing.remove();
+    console.error(err);
+    if (err.message && err.message.includes('401')) {
+      addAIMessage("API key issue — please check your key is correct. You can reset it by clearing the browser storage.");
+    } else {
+      addAIMessage("Something went wrong. Please try again.");
+    }
+  }
+
+  isLoading = false;
+  document.getElementById('sendBtn').disabled = false;
+  document.getElementById('chatInput').focus();
+}
+</script>
+</body>
+</html>
