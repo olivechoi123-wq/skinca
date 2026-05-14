@@ -9,728 +9,377 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #F5F0EB;
-    --bg2: #EDE5DA;
-    --surface: #FFFFFF;
-    --teal: #1D6B5E;
-    --teal-light: #E0F0ED;
-    --teal-mid: #2A8A7A;
-    --nude: #C8A882;
-    --nude-light: #EDE5DA;
-    --text: #1A1A18;
-    --text-mid: #5A5248;
-    --text-soft: #9A8F85;
-    --border: #DDD6CE;
-    --blush: #D4537E;
-    --amber: #F0C97A;
-    --radius: 16px;
-    --radius-sm: 10px;
+    --bg: #F5F0EB; --bg2: #EDE5DA; --surface: #FFFFFF;
+    --teal: #1D6B5E; --teal-light: #E0F0ED; --teal-mid: #2A8A7A;
+    --nude: #C8A882; --nude-light: #EDE5DA;
+    --text: #1A1A18; --text-mid: #5A5248; --text-soft: #9A8F85;
+    --border: #DDD6CE; --radius: 16px; --radius-sm: 10px;
     --shadow: 0 2px 20px rgba(26,26,24,0.06);
     --shadow-lg: 0 8px 40px rgba(26,26,24,0.10);
   }
+  html, body { height: 100%; background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); overflow: hidden; }
+  .app { display: flex; height: 100vh; max-width: 480px; margin: 0 auto; flex-direction: column; background: var(--bg); position: relative; }
+  @media (min-width: 480px) { .app { border-left: 1px solid var(--border); border-right: 1px solid var(--border); box-shadow: var(--shadow-lg); } }
 
-  html, body {
-    height: 100%;
-    background: var(--bg);
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text);
-    overflow: hidden;
-  }
+  /* HEADER */
+  .header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 16px; background: var(--bg); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--text); letter-spacing: -0.3px; }
+  .header-right { display: flex; align-items: center; gap: 8px; }
+  .header-badge { display: flex; align-items: center; gap: 6px; background: var(--teal-light); color: var(--teal); font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; }
+  .header-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
+  .country-tag { font-size: 11px; color: var(--text-soft); background: var(--bg2); padding: 4px 10px; border-radius: 20px; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-  /* ── LAYOUT ── */
-  .app {
-    display: flex;
-    height: 100vh;
-    max-width: 480px;
-    margin: 0 auto;
-    flex-direction: column;
-    background: var(--bg);
-    position: relative;
-  }
+  /* ONBOARDING */
+  .onboarding { display: flex; flex-direction: column; flex: 1; overflow-y: auto; animation: fadeUp 0.5s ease both; }
+  .onboarding-hero { padding: 32px 28px 24px; text-align: center; }
+  .welcome-icon { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 8px 24px rgba(29,107,94,0.25); }
+  .welcome-icon svg { width: 28px; height: 28px; }
+  .onboarding-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--text); line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px; }
+  .onboarding-hero h1 em { font-style: italic; color: var(--teal); }
+  .onboarding-hero p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
 
-  /* ── HEADER ── */
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px 16px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
+  /* MODE SELECT */
+  .mode-section { padding: 0 20px 20px; }
+  .section-label { font-size: 11px; font-weight: 500; color: var(--text-soft); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .mode-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .mode-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 12px; cursor: pointer; transition: all 0.2s; text-align: left; }
+  .mode-card:hover { border-color: var(--teal); background: var(--teal-light); }
+  .mode-card.selected { border-color: var(--teal); background: var(--teal-light); }
+  .mode-icon { font-size: 20px; margin-bottom: 8px; }
+  .mode-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .mode-desc { font-size: 11px; color: var(--text-soft); line-height: 1.5; }
 
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
+  /* COUNTRY SELECT */
+  .country-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .country-btn { background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; padding: 7px 14px; font-size: 12px; font-weight: 500; color: var(--text-mid); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 6px; }
+  .country-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .country-btn.selected { border-color: var(--teal); background: var(--teal); color: white; }
 
-  .header-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--teal-light);
-    color: var(--teal);
-    font-size: 11px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
+  /* QUICK MODE */
+  .quick-section { padding: 0 20px 20px; }
+  .quick-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .quick-opt { background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; padding: 7px 14px; font-size: 12px; color: var(--text-mid); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+  .quick-opt:hover, .quick-opt.selected { border-color: var(--teal); background: var(--teal-light); color: var(--teal); }
 
-  .header-badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--teal);
-    animation: pulse 2s infinite;
-  }
+  .start-btn { width: calc(100% - 40px); margin: 0 20px 24px; background: var(--teal); color: white; border: none; border-radius: 24px; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(29,107,94,0.25); }
+  .start-btn:hover { background: var(--teal-mid); transform: translateY(-1px); }
+  .start-btn:disabled { background: var(--border); cursor: not-allowed; transform: none; box-shadow: none; }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ── WELCOME SCREEN ── */
-  .welcome {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    padding: 40px 32px;
-    text-align: center;
-    gap: 24px;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .welcome-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 24px rgba(29,107,94,0.25);
-  }
-
-  .welcome-icon svg { width: 32px; height: 32px; }
-
-  .welcome h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 30px;
-    font-weight: 400;
-    color: var(--text);
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-  }
-
-  .welcome h1 em {
-    font-style: italic;
-    color: var(--teal);
-  }
-
-  .welcome p {
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.7;
-    max-width: 280px;
-  }
-
-  .welcome-hints {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    max-width: 320px;
-  }
-
-  .hint {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
-    font-size: 13px;
-    color: var(--text-mid);
-    text-align: left;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .hint:hover {
-    background: var(--teal-light);
-    border-color: var(--teal);
-    color: var(--teal);
-  }
-
-  .hint-icon {
-    font-size: 16px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .start-btn {
-    background: var(--teal);
-    color: white;
-    border: none;
-    border-radius: 24px;
-    padding: 14px 32px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 16px rgba(29,107,94,0.25);
-  }
-
-  .start-btn:hover {
-    background: var(--teal-mid);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(29,107,94,0.3);
-  }
-
-  /* ── CHAT AREA ── */
-  .chat-area {
-    display: none;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-  }
-
+  /* CHAT */
+  .chat-area { display: none; flex-direction: column; flex: 1; overflow: hidden; }
   .chat-area.active { display: flex; }
-
-  .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px 20px 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    scroll-behavior: smooth;
-  }
-
+  .messages { flex: 1; overflow-y: auto; padding: 20px 20px 8px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
   .messages::-webkit-scrollbar { width: 4px; }
-  .messages::-webkit-scrollbar-track { background: transparent; }
   .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-  /* ── MESSAGES ── */
-  .msg {
-    display: flex;
-    flex-direction: column;
-    max-width: 85%;
-    animation: msgIn 0.3s ease both;
-  }
-
-  @keyframes msgIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  /* MESSAGES */
+  .msg { display: flex; flex-direction: column; max-width: 85%; animation: msgIn 0.3s ease both; }
+  @keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   .msg.ai { align-self: flex-start; }
   .msg.user { align-self: flex-end; }
+  .msg-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; font-weight: 500; margin-bottom: 4px; }
+  .msg-bubble { padding: 11px 14px; border-radius: 16px; font-size: 13.5px; line-height: 1.65; }
+  .msg.ai .msg-bubble { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-top-left-radius: 4px; box-shadow: var(--shadow); }
+  .msg.user .msg-bubble { background: var(--teal); color: white; border-top-right-radius: 4px; }
+  .msg-image { max-width: 200px; border-radius: 10px; margin-bottom: 6px; display: block; }
+  .msg-actions { display: flex; gap: 6px; margin-top: 4px; justify-content: flex-end; }
+  .msg-edit-btn { font-size: 10px; color: var(--text-soft); background: none; border: none; cursor: pointer; padding: 2px 4px; opacity: 0; transition: opacity 0.2s; }
+  .msg.user:hover .msg-edit-btn { opacity: 1; }
 
-  .msg-avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--teal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: white;
-    font-weight: 500;
-    flex-shrink: 0;
-    margin-bottom: 4px;
-  }
-
-  .msg-bubble {
-    padding: 12px 14px;
-    border-radius: 16px;
-    font-size: 13.5px;
-    line-height: 1.65;
-  }
-
-  .msg.ai .msg-bubble {
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-top-left-radius: 4px;
-    box-shadow: var(--shadow);
-  }
-
-  .msg.user .msg-bubble {
-    background: var(--teal);
-    color: white;
-    border-top-right-radius: 4px;
-  }
-
-  /* image preview in message */
-  .msg-image {
-    max-width: 200px;
-    border-radius: 10px;
-    margin-bottom: 6px;
-    display: block;
-  }
-
-  /* typing indicator */
-  .typing {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 12px 14px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    border-top-left-radius: 4px;
-    width: fit-content;
-    box-shadow: var(--shadow);
-  }
-
-  .typing-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--text-soft);
-    animation: typingBounce 1.2s infinite;
-  }
-
+  .typing { display: flex; align-items: center; gap: 4px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; border-top-left-radius: 4px; width: fit-content; box-shadow: var(--shadow); }
+  .typing-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-soft); animation: typingBounce 1.2s infinite; }
   .typing-dot:nth-child(2) { animation-delay: 0.2s; }
   .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
 
-  @keyframes typingBounce {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-    30% { transform: translateY(-6px); opacity: 1; }
-  }
-
-  /* ── INPUT AREA ── */
-  .input-area {
-    padding: 12px 16px 24px;
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .photo-preview-wrap {
-    display: none;
-    margin-bottom: 8px;
-    position: relative;
-    width: fit-content;
-  }
-
+  /* INPUT */
+  .input-area { padding: 10px 16px 20px; background: var(--bg); border-top: 1px solid var(--border); flex-shrink: 0; }
+  .photo-preview-wrap { display: none; margin-bottom: 8px; position: relative; width: fit-content; }
   .photo-preview-wrap.active { display: block; }
-
-  .photo-preview {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid var(--teal);
-  }
-
-  .photo-remove {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--text);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .input-row {
-    display: flex;
-    align-items: flex-end;
-    gap: 8px;
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 20px;
-    padding: 8px 8px 8px 14px;
-    transition: border-color 0.2s;
-    box-shadow: var(--shadow);
-  }
-
-  .input-row:focus-within {
-    border-color: var(--teal);
-  }
-
-  .chat-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--text);
-    resize: none;
-    max-height: 100px;
-    line-height: 1.5;
-    min-height: 24px;
-  }
-
-  .chat-input::placeholder {
-    color: var(--text-soft);
-  }
-
-  .photo-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--nude-light);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.2s;
-    color: var(--nude);
-  }
-
-  .photo-btn:hover {
-    background: var(--nude);
-    color: white;
-  }
-
-  .send-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--teal);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.2s;
-    color: white;
-    flex-shrink: 0;
-  }
-
+  .photo-preview { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 2px solid var(--teal); }
+  .photo-remove { position: absolute; top: -6px; right: -6px; width: 18px; height: 18px; border-radius: 50%; background: var(--text); color: white; border: none; cursor: pointer; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+  .input-row { display: flex; align-items: flex-end; gap: 10px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; padding: 8px 10px 8px 14px; transition: border-color 0.2s; box-shadow: var(--shadow); }
+  .input-row:focus-within { border-color: var(--teal); }
+  .chat-input { flex: 1; border: none; outline: none; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); resize: none; max-height: 100px; line-height: 1.5; min-height: 24px; }
+  .chat-input::placeholder { color: var(--text-soft); }
+  .input-btns { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .photo-btn { width: 34px; height: 34px; border-radius: 50%; background: var(--nude-light); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: var(--nude); flex-shrink: 0; }
+  .photo-btn:hover { background: var(--nude); color: white; }
+  .send-btn { width: 34px; height: 34px; border-radius: 50%; background: var(--teal); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: white; flex-shrink: 0; }
   .send-btn:hover { background: var(--teal-mid); transform: scale(1.05); }
   .send-btn:disabled { background: var(--border); cursor: not-allowed; transform: none; }
-
-  .photo-hint {
-    text-align: center;
-    font-size: 11px;
-    color: var(--text-soft);
-    margin-top: 8px;
-  }
-
-  .photo-hint span {
-    color: var(--teal);
-    font-weight: 500;
-  }
-
-  /* ── DISCLAIMER ── */
-  .disclaimer {
-    text-align: center;
-    font-size: 10px;
-    color: var(--text-soft);
-    padding: 6px 24px 0;
-  }
-
-  /* ── HIDDEN FILE INPUT ── */
+  .disclaimer { text-align: center; font-size: 10px; color: var(--text-soft); padding: 6px 0 0; }
   #fileInput { display: none; }
 
-  /* ── QUICK REPLY CHIPS ── */
-  .quick-replies {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-  }
-
-  .chip {
-    background: var(--teal-light);
-    color: var(--teal);
-    border: 1px solid rgba(29,107,94,0.2);
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-
-  .chip:hover {
-    background: var(--teal);
-    color: white;
-  }
-
-  /* ── API KEY SETUP ── */
-  .api-setup {
-    position: fixed;
-    inset: 0;
-    background: rgba(26,26,24,0.6);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    padding: 24px;
-  }
-
-  .api-card {
-    background: var(--surface);
-    border-radius: 20px;
-    padding: 28px 24px;
-    max-width: 360px;
-    width: 100%;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .api-card h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
-
-  .api-card p {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-
-  .api-input {
-    width: 100%;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.2s;
-    margin-bottom: 12px;
-    background: var(--bg);
-  }
-
-  .api-input:focus { border-color: var(--teal); }
-
-  .api-save-btn {
-    width: 100%;
-    background: var(--teal);
-    color: white;
-    border: none;
-    border-radius: 24px;
-    padding: 13px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .api-save-btn:hover { background: var(--teal-mid); }
-
-  .api-note {
-    font-size: 11px;
-    color: var(--text-soft);
-    text-align: center;
-    margin-top: 10px;
-    line-height: 1.5;
-  }
-
-  /* ── MOBILE ── */
-  @media (min-width: 480px) {
-    .app {
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      box-shadow: var(--shadow-lg);
-    }
-  }
+  .quick-replies { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .chip { background: var(--teal-light); color: var(--teal); border: 1px solid rgba(29,107,94,0.2); border-radius: 20px; padding: 5px 12px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .chip:hover { background: var(--teal); color: white; }
 </style>
 </head>
 <body>
-
-<!-- API key managed server-side -->
-
 <div class="app">
-  <!-- Header -->
   <div class="header">
     <div class="logo">Skinca</div>
-    <div class="header-badge">AI Advisor</div>
+    <div class="header-right">
+      <button class="country-tag" id="countryTag" onclick="resetCountry()" style="display:none"></button>
+      <div class="header-badge">AI Advisor</div>
+    </div>
   </div>
 
-  <!-- Welcome Screen -->
-  <div class="welcome" id="welcomeScreen">
-    <div class="welcome-icon">
-      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16 6C10.477 6 6 10.477 6 16C6 21.523 10.477 26 16 26C21.523 26 26 21.523 26 16C26 10.477 21.523 6 16 6Z" stroke="white" stroke-width="1.5" fill="none"/>
-        <path d="M12 16.5C12.5 18 14 19.5 16 19.5C18 19.5 19.5 18 20 16.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="13" cy="14" r="1" fill="white"/>
-        <circle cx="19" cy="14" r="1" fill="white"/>
-      </svg>
-    </div>
-    <div>
+  <!-- ONBOARDING -->
+  <div class="onboarding" id="onboarding">
+    <div class="onboarding-hero">
+      <div class="welcome-icon">
+        <svg viewBox="0 0 32 32" fill="none"><path d="M16 6C10.477 6 6 10.477 6 16s4.477 10 10 10 10-4.477 10-10S21.523 6 16 6z" stroke="white" stroke-width="1.5" fill="none"/><path d="M12 16.5C12.5 18 14 19.5 16 19.5s3.5-1.5 4-3" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="14" r="1" fill="white"/><circle cx="19" cy="14" r="1" fill="white"/></svg>
+      </div>
       <h1>Your skin,<br><em>globally curated.</em></h1>
+      <p style="margin-top:8px;">AI-powered skin advice. Products from around the world — just for you.</p>
     </div>
-    <p>Tell me about your skin concerns and I'll find the best products from around the world — just for you.</p>
-    <div class="welcome-hints">
-      <div class="hint" onclick="useHint(this)">
-        <span class="hint-icon">🌿</span>
-        <span>"My skin is dry overall but gets oily in the T-zone. I have red marks on my temples."</span>
+
+    <!-- COUNTRY -->
+    <div class="mode-section">
+      <p class="section-label">Where do you shop?</p>
+      <div class="country-grid" id="countryGrid">
+        <button class="country-btn" onclick="selectCountry('us','🇺🇸 United States')">🇺🇸 United States</button>
+        <button class="country-btn" onclick="selectCountry('kr','🇰🇷 Korea')">🇰🇷 Korea</button>
+        <button class="country-btn" onclick="selectCountry('jp','🇯🇵 Japan')">🇯🇵 Japan</button>
+        <button class="country-btn" onclick="selectCountry('fr','🇫🇷 France / EU')">🇫🇷 France / EU</button>
+        <button class="country-btn" onclick="selectCountry('me','🇦🇪 Middle East')">🇦🇪 Middle East</button>
       </div>
-      <div class="hint" onclick="useHint(this)">
-        <span class="hint-icon">📸</span>
-        <span>"Attach a photo for a more precise skin read from the AI."</span>
-      </div>
-      <div class="hint" onclick="useHint(this)">
-        <span class="hint-icon">🧴</span>
-        <span>"Tell me what products you're currently using for a compatibility check."</span>
+
+      <!-- MODE -->
+      <p class="section-label">How do you want to start?</p>
+      <div class="mode-cards">
+        <div class="mode-card" id="modeDeep" onclick="selectMode('deep')">
+          <div class="mode-icon">🔍</div>
+          <div class="mode-title">Deep Consult</div>
+          <div class="mode-desc">Chat with AI. Photo analysis. Personalized routine.</div>
+        </div>
+        <div class="mode-card" id="modeQuick" onclick="selectMode('quick')">
+          <div class="mode-icon">⚡</div>
+          <div class="mode-title">Quick Routine</div>
+          <div class="mode-desc">Pick your skin type. Get a routine in 60 seconds.</div>
+        </div>
       </div>
     </div>
-    <button class="start-btn" onclick="startChat()">Start my skin consult →</button>
+
+    <!-- QUICK OPTIONS (hidden until quick selected) -->
+    <div class="quick-section" id="quickSection" style="display:none;">
+      <p class="section-label">Skin type</p>
+      <div class="quick-options" id="skinTypeOpts">
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'type')">Dry</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'type')">Oily</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'type')">Combination</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'type')">Sensitive</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'type')">Normal</button>
+      </div>
+      <p class="section-label" style="margin-top:12px;">Main concern</p>
+      <div class="quick-options" id="concernOpts">
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Dryness</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Breakouts</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Red marks</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Dark spots</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Pores</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Anti-aging</button>
+        <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Dullness</button>
+      </div>
+    </div>
+
+    <button class="start-btn" id="startBtn" onclick="startChat()" disabled>Choose your shopping country to start →</button>
   </div>
 
-  <!-- Chat Area -->
+  <!-- CHAT -->
   <div class="chat-area" id="chatArea">
     <div class="messages" id="messages"></div>
     <div class="input-area">
       <div class="photo-preview-wrap" id="photoPreviewWrap">
-        <img class="photo-preview" id="photoPreview" src="" alt="Photo">
+        <img class="photo-preview" id="photoPreview" src="" alt="">
         <button class="photo-remove" onclick="removePhoto()">✕</button>
       </div>
       <div class="input-row">
-        <textarea class="chat-input" id="chatInput" placeholder="Tell me about your skin... you can attach a photo too." rows="1"
-          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-        <button class="photo-btn" onclick="document.getElementById('fileInput').click()" title="Attach photo">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
-            <circle cx="12" cy="13" r="4"/>
-          </svg>
-        </button>
-        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13"/>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-          </svg>
-        </button>
+        <textarea class="chat-input" id="chatInput" placeholder="Tell me about your skin... you can attach a photo too." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <div class="input-btns">
+          <button class="photo-btn" onclick="document.getElementById('fileInput').click()" title="Attach photo">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </button>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
       </div>
-      <div class="disclaimer">
-        Skinca is an advisory service, not a medical provider. <br>Consult a dermatologist for medical concerns.
-      </div>
+      <div class="disclaimer">Skinca is an advisory service, not a medical provider. Consult a dermatologist for medical concerns.</div>
     </div>
   </div>
 </div>
-
 <input type="file" id="fileInput" accept="image/*" onchange="handlePhoto(event)">
 
 <script>
-// ── SYSTEM PROMPT ──
-const SYSTEM_PROMPT = `You are Skinca AI, a global skin and beauty advisor built into the Skinca app.
+const COUNTRY_PROMPTS = {
+  us: "The user shops in the United States. Recommend products available on Sephora, Amazon, Ulta, Target, Dermstore.",
+  kr: "The user shops in Korea. Recommend products available on Olive Young, Musinsa Beauty, Coupang.",
+  jp: "The user shops in Japan. Recommend products available at @Cosme, Cosme Kitchen, Amazon JP, Loft.",
+  fr: "The user shops in France / EU. Recommend products available at French pharmacies (Avène, La Roche-Posay, CeraVe), Sephora FR, Lookfantastic EU.",
+  me: "The user shops in the Middle East. Recommend products available at Sephora ME, Namshi, noon, Faces."
+};
 
-Your expertise combines:
-- Dermatology knowledge — skin physiology, conditions, active ingredients, barrier function
-- Global beauty curation — K-beauty, French pharmacy, US prestige, J-beauty, Middle Eastern beauty
-- Home care protocols — LED devices, RF/EMS, microcurrent, home peeling, dermaplaning, gua sha, dermarolling
-- Ingredient science — actives, pH compatibility, layering order, contraindications
-- Zone-specific care — overall skin + specific problem areas with targeted layering
-- Real-world product knowledge — actual texture, feel, absorption, and user experience
+const SYSTEM_PROMPT_BASE = `You are Skinca AI, a global skin and beauty advisor.
 
-Your personality:
-- Warm and knowledgeable — like a trusted friend who happens to be a skin expert
-- Direct and honest — never oversell, never overpromise
-- Curious and precise — ask smart questions to narrow down exactly what's happening
-- Globally minded — across brands and borders
-- Honest about limits — say so when you're not sure
+EXPERTISE: Dermatology knowledge, global beauty curation (K-beauty, French pharmacy, US prestige, J-beauty, Middle Eastern beauty), home care protocols (LED, RF/EMS, microcurrent, home peeling, dermaplaning, gua sha, dermarolling), ingredient science, zone-specific care, real-world product knowledge.
 
-TONE: Write like a knowledgeable friend, not a medical report. Use soft observational language: "~처럼 보여요", "this looks like...", "this appears to be...". Never use declarative diagnosis. Explain technical terms in plain language immediately.
+PERSONALITY: Warm and knowledgeable like a trusted friend who is a skin expert. Direct and honest. Globally minded. Never oversell.
 
-CONSULTATION FLOW:
-1. Listen first — let user describe freely before recommending
-2. Ask ONE question at a time (STRICT — never two questions in one message)
-3. Priority: clarify ambiguous symptoms first → shopping country → texture preference → routine depth
-4. Analyze clearly with warm observational language
-5. Recommend with ingredient rationale + real texture feel
+LANGUAGE RULES (CRITICAL):
+- Always use everyday language first, technical term in parentheses second.
+- CORRECT: "tiny clogged bumps (closed comedones)", "red marks left after a pimple (PIE — post-inflammatory erythema)", "dark spots (PIH — post-inflammatory hyperpigmentation)"
+- WRONG: Starting with the technical term before explaining it
+- After first mention, use only the everyday term
+- No emojis except 📸 when suggesting a photo
 
-CLARIFICATION RULE: Never jump to conclusions from vague descriptions.
-- "Red marks" → ask about color (pink/red vs brown/dark), texture (smooth vs uneven), duration
-- "Breakouts" → ask what type (whitehead, blackhead, cystic, papule)
-- "Sensitive skin" → ask when and where it reacts
-- After 2 rounds still unclear → suggest photo: "If you can share a photo, I'll be able to give you a much more accurate read."
+INFORMATION ASSESSMENT — CRITICAL RULE:
+Assess how much information the user gave in their first message:
 
-PHOTO: When a photo is attached, analyze it FIRST before asking anything. Comment on: texture, tone/discoloration (PIE vs PIH), active concerns, barrier state, zone differences. Always add: "Photos give me a good read, but for anything that looks medical, a dermatologist in person is always more accurate."
+RICH INFO (skin condition + concern + current products + any context = 3+ pieces):
+→ Do NOT summarize what they said back to them
+→ Go straight to: why their skin is doing what it's doing (analysis with insight) + assess their current products + give a clear direction or partial recommendation + ask ONE clarifying question only if truly needed
+→ Example response structure: [Insight about why] → [Current product assessment] → [Direction/partial recommendation] → [1 question max if needed]
 
-TEXTURE RULES:
-- If user stated texture preference → filter recommendations immediately
-- If user hasn't mentioned → flag notable texture when recommending and ask: "This one is quite rich and a little slow to absorb — does that work for you, or would you prefer something lighter?"
+PARTIAL INFO (1-2 pieces):
+→ Brief acknowledgment of what you understood + ask the single most important missing piece
+→ Never ask more than 1 question
 
-PACKAGING: If 2-3 products are genuinely similar in efficacy, ask packaging preference (jar vs tube vs pump). Only ask when options are truly equivalent.
+VAGUE INFO (just "my skin is bad" type):
+→ Ask the single most useful clarifying question
 
-PRODUCT ACCURACY: Never guess product details. If unsure: "I want to make sure I give you accurate info — could you check the key ingredients on the back?"
+NEVER:
+- Repeat or reformat what the user just told you as a bullet list summary
+- Ask 2+ questions in one message
+- Ask about shopping country (it's already set)
+- Use emojis except 📸
 
-HOME CARE SCOPE (all within scope, excluding medical procedures):
-Dehydration, dryness, barrier repair, oiliness, pores, PIE, PIH, melasma (home component), uneven tone, fine lines, acne (mild-moderate), fungal acne, texture, sensitivity, and all home devices (LED, RF/EMS, microcurrent, dermaroller, home peeling, dermaplaning, gua sha).
+SYMPTOM CLARIFICATION (when description is ambiguous):
+- "Red marks / spots" → ask: color (pink-red vs brown-dark) — this determines PIE vs dark spots
+- "Bumps / breakouts" → ask: do they have a white center, feel hard under skin, or are red and inflamed?
+- "Sensitive" → ask: when does it react — products, weather, or randomly?
+- After 2 rounds still unclear → suggest photo naturally: "A photo would help me see this more accurately — there's a 📸 button in the chat."
 
-GLOBAL MARKETS:
-- US: Sephora, Amazon, Ulta, Target, Dermstore
-- Korea: Olive Young, Musinsa Beauty, Coupang
-- Japan: @Cosme, Cosme Kitchen, Amazon JP
-- France/EU: Pharmacies, Sephora FR, Lookfantastic EU
-- Middle East: Sephora ME, Namshi, noon
+TEXTURE RULE:
+- If only 1 product fits → recommend it directly, mention texture as context ("this one is quite rich — does that work for you?")
+- If 2-3 similar products → present them with texture difference as the differentiator, let user choose
+- Never ask "what texture do you prefer?" before recommending
 
-NEVER: diagnose medical conditions, recommend prescriptions, guarantee results, ask two questions at once, guess product details, introduce devices before base routine is set, say only "see a doctor" without interim home care.
+PACKAGING: Only ask packaging preference (jar/tube/pump) when 2+ products are genuinely equivalent in efficacy.
 
-DISCLAIMER (include naturally when relevant): "I'm not a substitute for a dermatologist — if something looks like it needs medical attention, please get it checked in person."`;
+PHOTO ANALYSIS: When photo attached → analyze FIRST before anything else. Comment on: texture, tone/discoloration (everyday terms first), active concerns, barrier state, zone differences. Add naturally: "Photos give me a good read, but a dermatologist in person is always more accurate for anything that looks medical."
 
-// ── STATE ──
+PRODUCT ACCURACY: If unsure about a specific product's details → say so and ask for ingredient list rather than guessing.
+
+HOME CARE SCOPE (all within scope):
+Dryness, barrier repair, oiliness, clogged pores, red marks after pimples (PIE), dark spots (PIH), uneven tone, dullness, fine lines, breakouts (mild-moderate), fungal acne, texture, sensitivity, eye/lip/neck/body concerns, all home devices.
+
+Refer to dermatologist for: conditions needing diagnosis, prescription treatments, severe cystic acne, suspicious moles, professional procedures.
+When referring out — always give interim home care: "While you wait for that appointment / if you want to manage this at home in the meantime..."
+
+ROUTINE OUTPUT:
+When giving a full routine, structure it as:
+Morning / Evening / (Weekly if relevant)
+For each product: step name → product name → why it helps → how to apply → which zone
+Keep it scannable. No walls of text.`;
+
+let selectedCountry = null;
+let selectedMode = null;
+let quickSkinType = null;
+let quickConcern = null;
 let conversationHistory = [];
 let selectedImageBase64 = null;
 let selectedImageType = null;
 let isLoading = false;
+let messageIdCounter = 0;
 
-// ── INIT ──
-window.onload = () => {
-  // API key managed server-side via Vercel environment variables
-};
+function selectCountry(code, label) {
+  selectedCountry = code;
+  document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('selected'));
+  event.target.classList.add('selected');
+  document.getElementById('countryTag').textContent = label;
+  document.getElementById('countryTag').style.display = 'block';
+  updateStartBtn();
+}
 
+function resetCountry() {
+  selectedCountry = null;
+  document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('countryTag').style.display = 'none';
+  updateStartBtn();
+}
 
+function selectMode(mode) {
+  selectedMode = mode;
+  document.getElementById('modeDeep').classList.toggle('selected', mode === 'deep');
+  document.getElementById('modeQuick').classList.toggle('selected', mode === 'quick');
+  document.getElementById('quickSection').style.display = mode === 'quick' ? 'block' : 'none';
+  updateStartBtn();
+}
 
-// ── WELCOME → CHAT ──
+function toggleQuickOpt(el, group) {
+  const container = group === 'type' ? 'skinTypeOpts' : 'concernOpts';
+  document.querySelectorAll(`#${container} .quick-opt`).forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  if (group === 'type') quickSkinType = el.textContent;
+  else quickConcern = el.textContent;
+  updateStartBtn();
+}
+
+function updateStartBtn() {
+  const btn = document.getElementById('startBtn');
+  const countryOk = !!selectedCountry;
+  const modeOk = !!selectedMode;
+  const quickOk = selectedMode !== 'quick' || (quickSkinType && quickConcern);
+
+  if (!countryOk) {
+    btn.textContent = 'Choose your shopping country to start →';
+    btn.disabled = true;
+  } else if (!modeOk) {
+    btn.textContent = 'Choose how you want to start →';
+    btn.disabled = true;
+  } else if (!quickOk) {
+    btn.textContent = 'Select skin type and concern →';
+    btn.disabled = true;
+  } else {
+    btn.textContent = selectedMode === 'quick' ? 'Get my quick routine →' : 'Start my skin consult →';
+    btn.disabled = false;
+  }
+}
+
 function startChat() {
-  document.getElementById('welcomeScreen').style.display = 'none';
+  document.getElementById('onboarding').style.display = 'none';
   document.getElementById('chatArea').classList.add('active');
-  addAIMessage("Hi! I'm your Skinca advisor. Tell me about your skin — what's been bothering you, what you're currently using, and where you're shopping from. You can attach a photo too if that helps. 📸", []);
-  document.getElementById('chatInput').focus();
+
+  const countryContext = COUNTRY_PROMPTS[selectedCountry] || '';
+  const fullPrompt = SYSTEM_PROMPT_BASE + '\n\n' + countryContext;
+  conversationHistory = [];
+  conversationHistory._systemPrompt = fullPrompt;
+
+  if (selectedMode === 'quick') {
+    const quickMsg = `My skin type is ${quickSkinType}. My main concern is ${quickConcern}.`;
+    addUserMessage(quickMsg, null, null, false);
+    conversationHistory.push({ role: 'user', content: quickMsg });
+    callAPI(fullPrompt);
+  } else {
+    addAIMessage("Hi! Tell me what's going on with your skin — what you're noticing, what you're currently using, anything that's been bothering you. A photo helps too if you have one. 📸");
+    document.getElementById('chatInput').focus();
+  }
 }
 
-function useHint(el) {
-  if (el.querySelector('span:last-child').textContent.includes('Attach')) return;
-  startChat();
-}
-
-// ── MESSAGES ──
+/* ── MESSAGES ── */
 function addAIMessage(text, chips = []) {
   const messages = document.getElementById('messages');
+  const id = ++messageIdCounter;
   const div = document.createElement('div');
   div.className = 'msg ai';
+  div.dataset.id = id;
 
   const avatar = document.createElement('div');
   avatar.className = 'msg-avatar';
@@ -762,12 +411,15 @@ function addAIMessage(text, chips = []) {
 
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
+  return id;
 }
 
-function addUserMessage(text, imageBase64, imageType) {
+function addUserMessage(text, imageBase64, imageType, addEditBtn = true) {
   const messages = document.getElementById('messages');
+  const id = ++messageIdCounter;
   const div = document.createElement('div');
   div.className = 'msg user';
+  div.dataset.id = id;
 
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
@@ -778,17 +430,49 @@ function addUserMessage(text, imageBase64, imageType) {
     img.className = 'msg-image';
     bubble.appendChild(img);
   }
-
   if (text) {
     const p = document.createElement('p');
     p.style.margin = '0';
     p.textContent = text;
     bubble.appendChild(p);
   }
-
   div.appendChild(bubble);
+
+  if (addEditBtn) {
+    const actions = document.createElement('div');
+    actions.className = 'msg-actions';
+    const editBtn = document.createElement('button');
+    editBtn.className = 'msg-edit-btn';
+    editBtn.textContent = 'Edit';
+    editBtn.onclick = () => editMessage(div, text);
+    actions.appendChild(editBtn);
+    div.appendChild(actions);
+  }
+
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
+  return id;
+}
+
+function editMessage(msgDiv, originalText) {
+  const input = document.getElementById('chatInput');
+  input.value = originalText;
+  autoResize(input);
+  input.focus();
+
+  // Remove this message and everything after it from DOM and history
+  const msgs = document.getElementById('messages');
+  const allMsgs = Array.from(msgs.children);
+  const idx = allMsgs.indexOf(msgDiv);
+  for (let i = allMsgs.length - 1; i >= idx; i--) {
+    allMsgs[i].remove();
+  }
+
+  // Trim conversation history to match
+  // Each pair = user + assistant; find how many pairs to keep
+  const remainingMsgs = document.getElementById('messages').children.length;
+  // rough trim: remove last 2 entries per removed message pair
+  conversationHistory = conversationHistory.slice(0, Math.max(0, conversationHistory.length - 2));
 }
 
 function addTyping() {
@@ -796,15 +480,12 @@ function addTyping() {
   const div = document.createElement('div');
   div.className = 'msg ai';
   div.id = 'typingIndicator';
-
   const avatar = document.createElement('div');
   avatar.className = 'msg-avatar';
   avatar.textContent = 'S';
-
   const typing = document.createElement('div');
   typing.className = 'typing';
   typing.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-
   div.appendChild(avatar);
   div.appendChild(typing);
   messages.appendChild(div);
@@ -816,23 +497,19 @@ function formatText(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n\n/g, '</p><p style="margin-top:8px;">')
     .replace(/\n/g, '<br>');
 }
 
-// ── PHOTO ──
+/* ── PHOTO ── */
 function handlePhoto(event) {
   const file = event.target.files[0];
   if (!file) return;
-
   const reader = new FileReader();
   reader.onload = (e) => {
-    const base64 = e.target.result.split(',')[1];
-    const type = file.type;
-    selectedImageBase64 = base64;
-    selectedImageType = type;
-
-    const preview = document.getElementById('photoPreview');
-    preview.src = e.target.result;
+    selectedImageBase64 = e.target.result.split(',')[1];
+    selectedImageType = file.type;
+    document.getElementById('photoPreview').src = e.target.result;
     document.getElementById('photoPreviewWrap').classList.add('active');
   };
   reader.readAsDataURL(file);
@@ -846,12 +523,9 @@ function removePhoto() {
   document.getElementById('photoPreview').src = '';
 }
 
-// ── SEND ──
+/* ── SEND ── */
 function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 }
 
 function autoResize(el) {
@@ -861,7 +535,6 @@ function autoResize(el) {
 
 async function sendMessage() {
   if (isLoading) return;
-
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if (!text && !selectedImageBase64) return;
@@ -869,78 +542,52 @@ async function sendMessage() {
   isLoading = true;
   document.getElementById('sendBtn').disabled = true;
 
-  // Add user message to UI
   addUserMessage(text, selectedImageBase64, selectedImageType);
 
-  // Build message content for API
   const userContent = [];
   if (selectedImageBase64) {
-    userContent.push({
-      type: 'image',
-      source: {
-        type: 'base64',
-        media_type: selectedImageType,
-        data: selectedImageBase64
-      }
-    });
+    userContent.push({ type: 'image', source: { type: 'base64', media_type: selectedImageType, data: selectedImageBase64 } });
   }
-  if (text) {
-    userContent.push({ type: 'text', text });
-  }
+  if (text) userContent.push({ type: 'text', text });
 
-  // Add to history
   conversationHistory.push({ role: 'user', content: userContent });
 
-  // Clear input
   input.value = '';
   input.style.height = 'auto';
   removePhoto();
 
-  // Show typing
-  const typing = addTyping();
+  const systemPrompt = conversationHistory._systemPrompt || (SYSTEM_PROMPT_BASE + '\n\n' + (COUNTRY_PROMPTS[selectedCountry] || ''));
+  await callAPI(systemPrompt);
+}
 
+async function callAPI(systemPrompt) {
+  const typing = addTyping();
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: 1024,
-        system: SYSTEM_PROMPT,
-        messages: conversationHistory
+        max_tokens: 1500,
+        system: systemPrompt,
+        messages: conversationHistory.filter(m => m.role)
       })
     });
-
     const data = await response.json();
-
-    if (data.error) {
-      throw new Error(data.error.message);
-    }
-
+    if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
     const aiText = data.content[0].text;
-
-    // Add to history
     conversationHistory.push({ role: 'assistant', content: aiText });
-
-    // Remove typing, add response
     typing.remove();
     addAIMessage(aiText);
-
   } catch (err) {
     typing.remove();
     console.error(err);
-    if (err.message && err.message.includes('401')) {
-      addAIMessage("API key issue — please check your key is correct. You can reset it by clearing the browser storage.");
-    } else {
-      addAIMessage("Something went wrong. Please try again.");
-    }
+    addAIMessage("Something went wrong — please try again.");
   }
-
   isLoading = false;
   document.getElementById('sendBtn').disabled = false;
-  document.getElementById('chatInput').focus();
+  const input = document.getElementById('chatInput');
+  if (input) input.focus();
 }
 </script>
 </body>
