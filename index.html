@@ -14,65 +14,72 @@
     --teal: #1D6B5E; --teal-light: #E0F0ED; --teal-mid: #2A8A7A;
     --nude: #C8A882; --nude-light: #EDE5DA;
     --text: #1A1A18; --text-mid: #5A5248; --text-soft: #9A8F85;
-    --border: #DDD6CE; --radius: 16px; --radius-sm: 10px;
+    --border: #DDD6CE;
     --shadow: 0 2px 20px rgba(26,26,24,0.06);
     --shadow-lg: 0 8px 40px rgba(26,26,24,0.10);
   }
   html, body { height: 100%; background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); overflow: hidden; }
-  .app { display: flex; height: 100vh; max-width: 480px; margin: 0 auto; flex-direction: column; background: var(--bg); position: relative; }
+  .app { display: flex; height: 100vh; max-width: 480px; margin: 0 auto; flex-direction: column; background: var(--bg); }
   @media (min-width: 480px) { .app { border-left: 1px solid var(--border); border-right: 1px solid var(--border); box-shadow: var(--shadow-lg); } }
 
   /* HEADER */
   .header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 16px; background: var(--bg); border-bottom: 1px solid var(--border); flex-shrink: 0; }
   .logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--text); letter-spacing: -0.3px; }
-  .header-right { display: flex; align-items: center; gap: 8px; }
   .header-badge { display: flex; align-items: center; gap: 6px; background: var(--teal-light); color: var(--teal); font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; }
   .header-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
-  .country-tag { font-size: 11px; color: var(--text-soft); background: var(--bg2); padding: 4px 10px; border-radius: 20px; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
   /* ONBOARDING */
   .onboarding { display: flex; flex-direction: column; flex: 1; overflow-y: auto; animation: fadeUp 0.5s ease both; }
-  .onboarding-hero { padding: 32px 28px 24px; text-align: center; }
+  .onboarding-hero { padding: 32px 28px 20px; text-align: center; }
   .welcome-icon { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 8px 24px rgba(29,107,94,0.25); }
   .welcome-icon svg { width: 28px; height: 28px; }
   .onboarding-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--text); line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px; }
   .onboarding-hero h1 em { font-style: italic; color: var(--teal); }
   .onboarding-hero p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
 
-  /* MODE SELECT */
-  .mode-section { padding: 0 20px 20px; }
+  /* GUIDE CARDS */
+  .guide-section { padding: 0 20px 20px; }
+  .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+  .guide-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 12px; }
+  .guide-icon { font-size: 18px; margin-bottom: 6px; }
+  .guide-text { font-size: 11px; color: var(--text-mid); line-height: 1.55; }
+
+  /* MODE */
   .section-label { font-size: 11px; font-weight: 500; color: var(--text-soft); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
   .mode-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
   .mode-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 12px; cursor: pointer; transition: all 0.2s; text-align: left; }
-  .mode-card:hover { border-color: var(--teal); background: var(--teal-light); }
-  .mode-card.selected { border-color: var(--teal); background: var(--teal-light); }
+  .mode-card:hover, .mode-card.selected { border-color: var(--teal); background: var(--teal-light); }
   .mode-icon { font-size: 20px; margin-bottom: 8px; }
   .mode-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
   .mode-desc { font-size: 11px; color: var(--text-soft); line-height: 1.5; }
 
-  /* COUNTRY SELECT */
-  .country-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .country-btn { background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; padding: 7px 14px; font-size: 12px; font-weight: 500; color: var(--text-mid); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 6px; }
-  .country-btn:hover { border-color: var(--teal); color: var(--teal); }
-  .country-btn.selected { border-color: var(--teal); background: var(--teal); color: white; }
-
-  /* QUICK MODE */
-  .quick-section { padding: 0 20px 20px; }
+  /* QUICK */
+  .quick-section { padding: 0 20px 20px; display: none; }
   .quick-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
   .quick-opt { background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; padding: 7px 14px; font-size: 12px; color: var(--text-mid); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
   .quick-opt:hover, .quick-opt.selected { border-color: var(--teal); background: var(--teal-light); color: var(--teal); }
 
-  .start-btn { width: calc(100% - 40px); margin: 0 20px 24px; background: var(--teal); color: white; border: none; border-radius: 24px; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(29,107,94,0.25); }
+  .start-btn { width: calc(100% - 40px); margin: 0 20px 28px; background: var(--teal); color: white; border: none; border-radius: 24px; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(29,107,94,0.25); }
   .start-btn:hover { background: var(--teal-mid); transform: translateY(-1px); }
   .start-btn:disabled { background: var(--border); cursor: not-allowed; transform: none; box-shadow: none; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
   /* CHAT */
-  .chat-area { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+  .chat-area { display: none; flex-direction: column; flex: 1; overflow: hidden; position: relative; }
   .chat-area.active { display: flex; }
-  .messages { flex: 1; overflow-y: auto; padding: 20px 20px 8px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
+
+  /* BACKGROUND GUIDE (chat empty state) */
+  .chat-bg-guide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 28px; pointer-events: none; opacity: 1; transition: opacity 0.4s; }
+  .chat-bg-guide.hidden { opacity: 0; }
+  .guide-list { list-style: none; display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 320px; }
+  .guide-list li { display: flex; align-items: flex-start; gap: 10px; }
+  .guide-list li .g-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; opacity: 0.5; }
+  .guide-list li .g-text { font-size: 12.5px; color: var(--text-soft); line-height: 1.6; }
+  .guide-list li .g-text strong { color: var(--text-mid); font-weight: 500; }
+
+  .messages { flex: 1; overflow-y: auto; padding: 20px 20px 8px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; position: relative; z-index: 1; }
   .messages::-webkit-scrollbar { width: 4px; }
   .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
@@ -97,7 +104,7 @@
   @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
 
   /* INPUT */
-  .input-area { padding: 10px 16px 20px; background: var(--bg); border-top: 1px solid var(--border); flex-shrink: 0; }
+  .input-area { padding: 10px 16px 20px; background: var(--bg); border-top: 1px solid var(--border); flex-shrink: 0; z-index: 2; }
   .photo-preview-wrap { display: none; margin-bottom: 8px; position: relative; width: fit-content; }
   .photo-preview-wrap.active { display: block; }
   .photo-preview { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 2px solid var(--teal); }
@@ -114,7 +121,6 @@
   .send-btn:disabled { background: var(--border); cursor: not-allowed; transform: none; }
   .disclaimer { text-align: center; font-size: 10px; color: var(--text-soft); padding: 6px 0 0; }
   #fileInput { display: none; }
-
   .quick-replies { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
   .chip { background: var(--teal-light); color: var(--teal); border: 1px solid rgba(29,107,94,0.2); border-radius: 20px; padding: 5px 12px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
   .chip:hover { background: var(--teal); color: white; }
@@ -124,10 +130,7 @@
 <div class="app">
   <div class="header">
     <div class="logo">Skinca</div>
-    <div class="header-right">
-      <button class="country-tag" id="countryTag" onclick="resetCountry()" style="display:none"></button>
-      <div class="header-badge">AI Advisor</div>
-    </div>
+    <div class="header-badge">AI Advisor</div>
   </div>
 
   <!-- ONBOARDING -->
@@ -137,38 +140,46 @@
         <svg viewBox="0 0 32 32" fill="none"><path d="M16 6C10.477 6 6 10.477 6 16s4.477 10 10 10 10-4.477 10-10S21.523 6 16 6z" stroke="white" stroke-width="1.5" fill="none"/><path d="M12 16.5C12.5 18 14 19.5 16 19.5s3.5-1.5 4-3" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="14" r="1" fill="white"/><circle cx="19" cy="14" r="1" fill="white"/></svg>
       </div>
       <h1>Your skin,<br><em>globally curated.</em></h1>
-      <p style="margin-top:8px;">AI-powered skin advice. Products from around the world — just for you.</p>
+      <p style="margin-top:8px;">AI-powered skin advice. Products from around the world — matched to you.</p>
     </div>
 
-    <!-- COUNTRY -->
-    <div class="mode-section">
-      <p class="section-label">Where do you shop?</p>
-      <div class="country-grid" id="countryGrid">
-        <button class="country-btn" onclick="selectCountry('us','🇺🇸 United States')">🇺🇸 United States</button>
-        <button class="country-btn" onclick="selectCountry('kr','🇰🇷 Korea')">🇰🇷 Korea</button>
-        <button class="country-btn" onclick="selectCountry('jp','🇯🇵 Japan')">🇯🇵 Japan</button>
-        <button class="country-btn" onclick="selectCountry('fr','🇫🇷 France / EU')">🇫🇷 France / EU</button>
-        <button class="country-btn" onclick="selectCountry('me','🇦🇪 Middle East')">🇦🇪 Middle East</button>
+    <div class="guide-section">
+      <p class="section-label" style="margin-bottom:10px;">What Skinca does for you</p>
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-icon">💬</div>
+          <div class="guide-text">Tell us your skin concerns, what you use, and what bothers you — the more detail, the better.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon">📸</div>
+          <div class="guide-text">Attach a photo of your skin for a more precise read from the AI.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon">🧴</div>
+          <div class="guide-text">Get products and routines matched to your exact skin — from global brands.</div>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon">🏠</div>
+          <div class="guide-text">Skincare, home devices, and treatments — everything you can do before seeing a dermatologist.</div>
+        </div>
       </div>
 
-      <!-- MODE -->
       <p class="section-label">How do you want to start?</p>
       <div class="mode-cards">
         <div class="mode-card" id="modeDeep" onclick="selectMode('deep')">
           <div class="mode-icon">🔍</div>
           <div class="mode-title">Deep Consult</div>
-          <div class="mode-desc">Chat with AI. Photo analysis. Personalized routine.</div>
+          <div class="mode-desc">Chat with AI. Photo analysis. Full personalized routine.</div>
         </div>
         <div class="mode-card" id="modeQuick" onclick="selectMode('quick')">
           <div class="mode-icon">⚡</div>
           <div class="mode-title">Quick Routine</div>
-          <div class="mode-desc">Pick your skin type. Get a routine in 60 seconds.</div>
+          <div class="mode-desc">Pick your skin type and get a starter routine fast.</div>
         </div>
       </div>
     </div>
 
-    <!-- QUICK OPTIONS (hidden until quick selected) -->
-    <div class="quick-section" id="quickSection" style="display:none;">
+    <div class="quick-section" id="quickSection">
       <p class="section-label">Skin type</p>
       <div class="quick-options" id="skinTypeOpts">
         <button class="quick-opt" onclick="toggleQuickOpt(this,'type')">Dry</button>
@@ -177,7 +188,7 @@
         <button class="quick-opt" onclick="toggleQuickOpt(this,'type')">Sensitive</button>
         <button class="quick-opt" onclick="toggleQuickOpt(this,'type')">Normal</button>
       </div>
-      <p class="section-label" style="margin-top:12px;">Main concern</p>
+      <p class="section-label" style="margin-top:14px;">Main concern</p>
       <div class="quick-options" id="concernOpts">
         <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Dryness</button>
         <button class="quick-opt" onclick="toggleQuickOpt(this,'concern')">Breakouts</button>
@@ -189,11 +200,20 @@
       </div>
     </div>
 
-    <button class="start-btn" id="startBtn" onclick="startChat()" disabled>Choose your shopping country to start →</button>
+    <button class="start-btn" id="startBtn" onclick="startChat()" disabled>Choose how you want to start →</button>
   </div>
 
   <!-- CHAT -->
   <div class="chat-area" id="chatArea">
+    <!-- Background guide (fades out after first message) -->
+    <div class="chat-bg-guide" id="chatBgGuide">
+      <ul class="guide-list">
+        <li><span class="g-icon">💬</span><span class="g-text"><strong>Share everything</strong> — your skin type, concerns, products you use, and anything that's been bothering you.</span></li>
+        <li><span class="g-icon">📸</span><span class="g-text"><strong>Add a photo</strong> — the AI can read your skin more accurately with a picture. Tap the camera button below.</span></li>
+        <li><span class="g-icon">🔄</span><span class="g-text"><strong>Keep the conversation going</strong> — the more you share, the more personalized your recommendations get.</span></li>
+        <li><span class="g-icon">🏠</span><span class="g-text"><strong>Everything before the dermatologist</strong> — skincare, home devices, treatments. We'll cover it all.</span></li>
+      </ul>
+    </div>
     <div class="messages" id="messages"></div>
     <div class="input-area">
       <div class="photo-preview-wrap" id="photoPreviewWrap">
@@ -201,9 +221,9 @@
         <button class="photo-remove" onclick="removePhoto()">✕</button>
       </div>
       <div class="input-row">
-        <textarea class="chat-input" id="chatInput" placeholder="Tell me about your skin... you can attach a photo too." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <textarea class="chat-input" id="chatInput" placeholder="Tell me about your skin..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
         <div class="input-btns">
-          <button class="photo-btn" onclick="document.getElementById('fileInput').click()" title="Attach photo">
+          <button class="photo-btn" onclick="document.getElementById('fileInput').click()" title="Attach a photo of your skin">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
           </button>
           <button class="send-btn" id="sendBtn" onclick="sendMessage()">
@@ -218,78 +238,102 @@
 <input type="file" id="fileInput" accept="image/*" onchange="handlePhoto(event)">
 
 <script>
-const COUNTRY_PROMPTS = {
-  us: "The user shops in the United States. Recommend products available on Sephora, Amazon, Ulta, Target, Dermstore.",
-  kr: "The user shops in Korea. Recommend products available on Olive Young, Musinsa Beauty, Coupang.",
-  jp: "The user shops in Japan. Recommend products available at @Cosme, Cosme Kitchen, Amazon JP, Loft.",
-  fr: "The user shops in France / EU. Recommend products available at French pharmacies (Avène, La Roche-Posay, CeraVe), Sephora FR, Lookfantastic EU.",
-  me: "The user shops in the Middle East. Recommend products available at Sephora ME, Namshi, noon, Faces."
-};
+const SYSTEM_PROMPT = `You are Skinca AI, a warm and expert skin advisor for users in the United States. You recommend products available on Sephora, Amazon, Ulta, Target, and Dermstore.
 
-const SYSTEM_PROMPT_BASE = `You are Skinca AI, a global skin and beauty advisor.
+EXPERTISE: Dermatology knowledge, global beauty curation (K-beauty, French pharmacy, US prestige, J-beauty), ingredient science, zone-specific care, home care protocols (LED, RF/EMS, microcurrent, home peeling, dermaplaning, gua sha, dermarolling), real-world product knowledge.
 
-EXPERTISE: Dermatology knowledge, global beauty curation (K-beauty, French pharmacy, US prestige, J-beauty, Middle Eastern beauty), home care protocols (LED, RF/EMS, microcurrent, home peeling, dermaplaning, gua sha, dermarolling), ingredient science, zone-specific care, real-world product knowledge.
-
-PERSONALITY: Warm and knowledgeable like a trusted friend who is a skin expert. Direct and honest. Globally minded. Never oversell.
-
-LANGUAGE RULES (CRITICAL):
-- Always use everyday language first, technical term in parentheses second.
-- CORRECT: "tiny clogged bumps (closed comedones)", "red marks left after a pimple (PIE — post-inflammatory erythema)", "dark spots (PIH — post-inflammatory hyperpigmentation)"
-- WRONG: Starting with the technical term before explaining it
-- After first mention, use only the everyday term
+PERSONALITY & TONE:
+- Like a warm, knowledgeable friend who happens to be a skin expert
+- Never clinical or robotic — always human and caring
+- When a user seems overwhelmed, stressed about their skin, or has many concerns: be extra warm and reassuring. Say things like "This is actually really common and very manageable" or "A lot of people deal with exactly this — let's work through it together." Make them feel seen and not alone.
+- Never make empty promises or overhype results — be honest about what home care can and cannot fix
+- Never be the first to end the conversation. After covering skin, products, and routine — always check in: "Is there anything else you're curious about, or anything we haven't covered yet?" Never say goodbye or signal the conversation is over.
 - No emojis except 📸 when suggesting a photo
 
-INFORMATION ASSESSMENT — CRITICAL RULE:
-Assess how much information the user gave in their first message:
+LANGUAGE RULES (CRITICAL):
+- Always use everyday language first, technical term in parentheses on first mention only
+- CORRECT: "tiny clogged bumps (closed comedones)", "red marks left after a pimple (PIE)", "dark spots from old breakouts (PIH)"
+- WRONG: leading with the technical term before explaining it
+- After first mention: use everyday terms only
+- Same rule for ingredients: "niacinamide (a form of vitamin B3 that helps with redness and uneven tone)" on first mention, then just "niacinamide"
 
-RICH INFO (skin condition + concern + current products + any context = 3+ pieces):
-→ Do NOT summarize what they said back to them
-→ Go straight to: why their skin is doing what it's doing (analysis with insight) + assess their current products + give a clear direction or partial recommendation + ask ONE clarifying question only if truly needed
-→ Example response structure: [Insight about why] → [Current product assessment] → [Direction/partial recommendation] → [1 question max if needed]
+INFORMATION ASSESSMENT — READ THIS CAREFULLY:
 
-PARTIAL INFO (1-2 pieces):
-→ Brief acknowledgment of what you understood + ask the single most important missing piece
-→ Never ask more than 1 question
+When the user sends their first message, assess how much information they gave:
 
-VAGUE INFO (just "my skin is bad" type):
-→ Ask the single most useful clarifying question
+HIGH INFO — 3+ of these: skin type/condition, specific concern, current products, skin history/context:
+→ Do NOT bullet-list their information back at them
+→ Go straight to: [Why their skin is doing what it's doing] + [Assessment of current products if mentioned] + [Clear direction or initial recommendation] + [1 follow-up question only if genuinely needed]
+→ The user already told you what's happening — your job is to add insight, not echo
 
-NEVER:
-- Repeat or reformat what the user just told you as a bullet list summary
-- Ask 2+ questions in one message
-- Ask about shopping country (it's already set)
-- Use emojis except 📸
+MEDIUM INFO — 1-2 pieces:
+→ Brief acknowledgment + the single most useful follow-up question
+→ Already give some directional insight based on what you know
 
-SYMPTOM CLARIFICATION (when description is ambiguous):
-- "Red marks / spots" → ask: color (pink-red vs brown-dark) — this determines PIE vs dark spots
-- "Bumps / breakouts" → ask: do they have a white center, feel hard under skin, or are red and inflamed?
-- "Sensitive" → ask: when does it react — products, weather, or randomly?
-- After 2 rounds still unclear → suggest photo naturally: "A photo would help me see this more accurately — there's a 📸 button in the chat."
+LOW INFO — vague ("my skin is bad", "help me"):
+→ Ask the single most helpful clarifying question
+→ Be warm: "Tell me more about what's going on — what does your skin feel like day to day?"
+
+NEVER summarize what the user just told you as a bullet list. They know what they said. Add value.
+
+DIGGING DEEPER INTO KEY SYMPTOMS:
+When a user mentions a prominent or complex symptom (dryness, PIE/red marks, breakouts, sensitivity), don't treat it as a single data point. Use it as a thread to pull on — ask follow-up questions that uncover the full picture:
+
+Dryness example — don't just file it as "dry skin." Explore:
+- Is it tight right after washing, or all day?
+- Any flakiness, fine lines, or rough patches?
+- Does the skin feel thirsty even after moisturizing?
+- Body dry too, or just face?
+→ This reveals whether it's a barrier issue, dehydration, oil deficiency, or all three — and changes the recommendation significantly.
+
+Red marks / PIE example:
+- Are they pink-red or brown-dark? (This separates PIE from dark spots)
+- Do they feel smooth to touch?
+- How long have they been there?
+→ Don't guess PIE vs PIH — confirm it.
+
+Breakouts:
+- Small whiteheads, hard bumps under skin, or red inflamed ones?
+- Where do they appear — forehead, chin, cheeks?
+- Any pattern (hormonal cycle, diet, products)?
+
+Sensitivity:
+- Stinging/burning, or just redness?
+- After products, or randomly?
+- Any known triggers?
 
 TEXTURE RULE:
-- If only 1 product fits → recommend it directly, mention texture as context ("this one is quite rich — does that work for you?")
-- If 2-3 similar products → present them with texture difference as the differentiator, let user choose
-- Never ask "what texture do you prefer?" before recommending
+- 1 best product → recommend it directly, mention texture as context ("heads up, this one is quite rich — does that work for you?")
+- 2-3 similar products → present with texture as the differentiator, let user choose
+- Never ask "what texture do you prefer?" before recommending anything
 
-PACKAGING: Only ask packaging preference (jar/tube/pump) when 2+ products are genuinely equivalent in efficacy.
+PACKAGING: Only ask jar/tube/pump preference when 2+ products are genuinely equivalent.
 
-PHOTO ANALYSIS: When photo attached → analyze FIRST before anything else. Comment on: texture, tone/discoloration (everyday terms first), active concerns, barrier state, zone differences. Add naturally: "Photos give me a good read, but a dermatologist in person is always more accurate for anything that looks medical."
+PHOTO: When photo attached → analyze FIRST before anything else.
+Comment on: texture, tone/discoloration (everyday terms first), active concerns, barrier state, zone differences.
+Add naturally: "Photos give me a good read, but a dermatologist in person is always more accurate for anything that looks medical."
 
-PRODUCT ACCURACY: If unsure about a specific product's details → say so and ask for ingredient list rather than guessing.
+PRODUCT ACCURACY: If unsure about a specific product's details → say so. Ask for ingredient list rather than guessing.
 
 HOME CARE SCOPE (all within scope):
-Dryness, barrier repair, oiliness, clogged pores, red marks after pimples (PIE), dark spots (PIH), uneven tone, dullness, fine lines, breakouts (mild-moderate), fungal acne, texture, sensitivity, eye/lip/neck/body concerns, all home devices.
+Dryness, barrier repair, oiliness, clogged pores, red post-pimple marks (PIE), dark spots (PIH), uneven tone, dullness, fine lines, mild-moderate breakouts, fungal acne, texture, sensitivity, eye/lip/neck/body concerns, all home devices.
 
-Refer to dermatologist for: conditions needing diagnosis, prescription treatments, severe cystic acne, suspicious moles, professional procedures.
-When referring out — always give interim home care: "While you wait for that appointment / if you want to manage this at home in the meantime..."
+Refer to dermatologist for: conditions needing diagnosis, prescriptions, severe cystic acne, suspicious spots, professional procedures.
+When referring out — ALWAYS give interim home care: "While you're waiting for that appointment, here's what you can do at home in the meantime..."
 
-ROUTINE OUTPUT:
-When giving a full routine, structure it as:
-Morning / Evening / (Weekly if relevant)
-For each product: step name → product name → why it helps → how to apply → which zone
-Keep it scannable. No walls of text.`;
+ROUTINE FORMAT (when giving a full routine):
+Structure clearly as Morning / Evening / (Weekly if relevant).
+For each product: step → product name → why it helps this person specifically → how/where to apply.
+Keep it scannable. No walls of text. Break it into sections.
 
-let selectedCountry = null;
+NEVER:
+- Summarize what the user told you back to them as bullets
+- Ask 2+ questions in one message
+- Use emojis (except 📸)
+- Be the first to end the conversation
+- Overpromise what home care can fix
+- Guess product details you're unsure about`;
+
 let selectedMode = null;
 let quickSkinType = null;
 let quickConcern = null;
@@ -297,23 +341,7 @@ let conversationHistory = [];
 let selectedImageBase64 = null;
 let selectedImageType = null;
 let isLoading = false;
-let messageIdCounter = 0;
-
-function selectCountry(code, label) {
-  selectedCountry = code;
-  document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('selected'));
-  event.target.classList.add('selected');
-  document.getElementById('countryTag').textContent = label;
-  document.getElementById('countryTag').style.display = 'block';
-  updateStartBtn();
-}
-
-function resetCountry() {
-  selectedCountry = null;
-  document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('selected'));
-  document.getElementById('countryTag').style.display = 'none';
-  updateStartBtn();
-}
+let hasStartedChat = false;
 
 function selectMode(mode) {
   selectedMode = mode;
@@ -325,7 +353,7 @@ function selectMode(mode) {
 
 function toggleQuickOpt(el, group) {
   const container = group === 'type' ? 'skinTypeOpts' : 'concernOpts';
-  document.querySelectorAll(`#${container} .quick-opt`).forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#' + container + ' .quick-opt').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
   if (group === 'type') quickSkinType = el.textContent;
   else quickConcern = el.textContent;
@@ -334,64 +362,42 @@ function toggleQuickOpt(el, group) {
 
 function updateStartBtn() {
   const btn = document.getElementById('startBtn');
-  const countryOk = !!selectedCountry;
   const modeOk = !!selectedMode;
   const quickOk = selectedMode !== 'quick' || (quickSkinType && quickConcern);
-
-  if (!countryOk) {
-    btn.textContent = 'Choose your shopping country to start →';
-    btn.disabled = true;
-  } else if (!modeOk) {
-    btn.textContent = 'Choose how you want to start →';
-    btn.disabled = true;
-  } else if (!quickOk) {
-    btn.textContent = 'Select skin type and concern →';
-    btn.disabled = true;
-  } else {
-    btn.textContent = selectedMode === 'quick' ? 'Get my quick routine →' : 'Start my skin consult →';
-    btn.disabled = false;
-  }
+  if (!modeOk) { btn.textContent = 'Choose how you want to start →'; btn.disabled = true; }
+  else if (!quickOk) { btn.textContent = 'Select your skin type and concern →'; btn.disabled = true; }
+  else { btn.textContent = selectedMode === 'quick' ? 'Get my quick routine →' : 'Start my skin consult →'; btn.disabled = false; }
 }
 
 function startChat() {
   document.getElementById('onboarding').style.display = 'none';
   document.getElementById('chatArea').classList.add('active');
-
-  const countryContext = COUNTRY_PROMPTS[selectedCountry] || '';
-  const fullPrompt = SYSTEM_PROMPT_BASE + '\n\n' + countryContext;
   conversationHistory = [];
-  conversationHistory._systemPrompt = fullPrompt;
 
   if (selectedMode === 'quick') {
-    const quickMsg = `My skin type is ${quickSkinType}. My main concern is ${quickConcern}.`;
-    addUserMessage(quickMsg, null, null, false);
-    conversationHistory.push({ role: 'user', content: quickMsg });
-    callAPI(fullPrompt);
+    const msg = `My skin type is ${quickSkinType}. My main concern is ${quickConcern}.`;
+    addUserMessage(msg, null, null, false);
+    conversationHistory.push({ role: 'user', content: msg });
+    callAPI();
   } else {
-    addAIMessage("Hi! Tell me what's going on with your skin — what you're noticing, what you're currently using, anything that's been bothering you. A photo helps too if you have one. 📸");
     document.getElementById('chatInput').focus();
   }
 }
 
 /* ── MESSAGES ── */
 function addAIMessage(text, chips = []) {
+  hideChatBgGuide();
   const messages = document.getElementById('messages');
-  const id = ++messageIdCounter;
   const div = document.createElement('div');
   div.className = 'msg ai';
-  div.dataset.id = id;
-
   const avatar = document.createElement('div');
   avatar.className = 'msg-avatar';
   avatar.textContent = 'S';
-
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
   bubble.innerHTML = formatText(text);
-
   div.appendChild(avatar);
   div.appendChild(bubble);
-
   if (chips && chips.length > 0) {
     const chipWrap = document.createElement('div');
     chipWrap.className = 'quick-replies';
@@ -399,34 +405,25 @@ function addAIMessage(text, chips = []) {
       const chip = document.createElement('button');
       chip.className = 'chip';
       chip.textContent = c;
-      chip.onclick = () => {
-        document.getElementById('chatInput').value = c;
-        chipWrap.remove();
-        sendMessage();
-      };
+      chip.onclick = () => { document.getElementById('chatInput').value = c; chipWrap.remove(); sendMessage(); };
       chipWrap.appendChild(chip);
     });
     div.appendChild(chipWrap);
   }
-
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
-  return id;
 }
 
 function addUserMessage(text, imageBase64, imageType, addEditBtn = true) {
+  hideChatBgGuide();
   const messages = document.getElementById('messages');
-  const id = ++messageIdCounter;
   const div = document.createElement('div');
   div.className = 'msg user';
-  div.dataset.id = id;
-
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
-
   if (imageBase64) {
     const img = document.createElement('img');
-    img.src = `data:${imageType};base64,${imageBase64}`;
+    img.src = 'data:' + imageType + ';base64,' + imageBase64;
     img.className = 'msg-image';
     bubble.appendChild(img);
   }
@@ -437,7 +434,6 @@ function addUserMessage(text, imageBase64, imageType, addEditBtn = true) {
     bubble.appendChild(p);
   }
   div.appendChild(bubble);
-
   if (addEditBtn) {
     const actions = document.createElement('div');
     actions.className = 'msg-actions';
@@ -448,10 +444,17 @@ function addUserMessage(text, imageBase64, imageType, addEditBtn = true) {
     actions.appendChild(editBtn);
     div.appendChild(actions);
   }
-
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
-  return id;
+}
+
+function hideChatBgGuide() {
+  if (!hasStartedChat) {
+    hasStartedChat = true;
+    const guide = document.getElementById('chatBgGuide');
+    if (guide) guide.classList.add('hidden');
+    setTimeout(() => { if (guide) guide.style.display = 'none'; }, 400);
+  }
 }
 
 function editMessage(msgDiv, originalText) {
@@ -459,19 +462,10 @@ function editMessage(msgDiv, originalText) {
   input.value = originalText;
   autoResize(input);
   input.focus();
-
-  // Remove this message and everything after it from DOM and history
   const msgs = document.getElementById('messages');
   const allMsgs = Array.from(msgs.children);
   const idx = allMsgs.indexOf(msgDiv);
-  for (let i = allMsgs.length - 1; i >= idx; i--) {
-    allMsgs[i].remove();
-  }
-
-  // Trim conversation history to match
-  // Each pair = user + assistant; find how many pairs to keep
-  const remainingMsgs = document.getElementById('messages').children.length;
-  // rough trim: remove last 2 entries per removed message pair
+  for (let i = allMsgs.length - 1; i >= idx; i--) allMsgs[i].remove();
   conversationHistory = conversationHistory.slice(0, Math.max(0, conversationHistory.length - 2));
 }
 
@@ -527,40 +521,27 @@ function removePhoto() {
 function handleKey(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 }
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
-}
+function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; }
 
 async function sendMessage() {
   if (isLoading) return;
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if (!text && !selectedImageBase64) return;
-
   isLoading = true;
   document.getElementById('sendBtn').disabled = true;
-
   addUserMessage(text, selectedImageBase64, selectedImageType);
-
   const userContent = [];
-  if (selectedImageBase64) {
-    userContent.push({ type: 'image', source: { type: 'base64', media_type: selectedImageType, data: selectedImageBase64 } });
-  }
+  if (selectedImageBase64) userContent.push({ type: 'image', source: { type: 'base64', media_type: selectedImageType, data: selectedImageBase64 } });
   if (text) userContent.push({ type: 'text', text });
-
   conversationHistory.push({ role: 'user', content: userContent });
-
   input.value = '';
   input.style.height = 'auto';
   removePhoto();
-
-  const systemPrompt = conversationHistory._systemPrompt || (SYSTEM_PROMPT_BASE + '\n\n' + (COUNTRY_PROMPTS[selectedCountry] || ''));
-  await callAPI(systemPrompt);
+  await callAPI();
 }
 
-async function callAPI(systemPrompt) {
+async function callAPI() {
   const typing = addTyping();
   try {
     const response = await fetch('/api/chat', {
@@ -569,7 +550,7 @@ async function callAPI(systemPrompt) {
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
         max_tokens: 1500,
-        system: systemPrompt,
+        system: SYSTEM_PROMPT,
         messages: conversationHistory.filter(m => m.role)
       })
     });
