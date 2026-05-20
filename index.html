@@ -38,15 +38,13 @@
   .onboarding-hero h1 em { font-style: italic; color: var(--teal); }
   .onboarding-hero p { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
 
-  /* GUIDE CARDS */
   .guide-section { padding: 0 20px 20px; }
   .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
   .guide-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 12px; }
   .guide-icon { font-size: 18px; margin-bottom: 6px; }
   .guide-text { font-size: 11px; color: var(--text-mid); line-height: 1.55; }
-
-  /* MODE */
   .section-label { font-size: 11px; font-weight: 500; color: var(--text-soft); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+
   .mode-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
   .mode-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 12px; cursor: pointer; transition: all 0.2s; text-align: left; }
   .mode-card:hover, .mode-card.selected { border-color: var(--teal); background: var(--teal-light); }
@@ -54,7 +52,6 @@
   .mode-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
   .mode-desc { font-size: 11px; color: var(--text-soft); line-height: 1.5; }
 
-  /* QUICK */
   .quick-section { padding: 0 20px 20px; display: none; }
   .quick-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
   .quick-opt { background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; padding: 7px 14px; font-size: 12px; color: var(--text-mid); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
@@ -63,14 +60,12 @@
   .start-btn { width: calc(100% - 40px); margin: 0 20px 28px; background: var(--teal); color: white; border: none; border-radius: 24px; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(29,107,94,0.25); }
   .start-btn:hover { background: var(--teal-mid); transform: translateY(-1px); }
   .start-btn:disabled { background: var(--border); cursor: not-allowed; transform: none; box-shadow: none; }
-
   @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
   /* CHAT */
   .chat-area { display: none; flex-direction: column; flex: 1; overflow: hidden; position: relative; }
   .chat-area.active { display: flex; }
 
-  /* BACKGROUND GUIDE (chat empty state) */
   .chat-bg-guide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 28px; pointer-events: none; opacity: 1; transition: opacity 0.4s; }
   .chat-bg-guide.hidden { opacity: 0; }
   .guide-list { list-style: none; display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 320px; }
@@ -83,7 +78,6 @@
   .messages::-webkit-scrollbar { width: 4px; }
   .messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-  /* MESSAGES */
   .msg { display: flex; flex-direction: column; max-width: 85%; animation: msgIn 0.3s ease both; }
   @keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
   .msg.ai { align-self: flex-start; }
@@ -102,6 +96,23 @@
   .typing-dot:nth-child(2) { animation-delay: 0.2s; }
   .typing-dot:nth-child(3) { animation-delay: 0.4s; }
   @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
+
+  /* ROUTINE CARD */
+  .routine-card-wrap { background: var(--bg2); border-radius: 16px; padding: 14px; margin: 4px 0; border: 0.5px solid var(--border); }
+  .routine-card-title { font-size: 11px; font-weight: 500; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .product-card { background: var(--surface); border-radius: 10px; border: 0.5px solid var(--border); padding: 10px 12px; margin-bottom: 8px; }
+  .product-card:last-child { margin-bottom: 0; }
+  .product-step { font-size: 10px; font-weight: 500; color: var(--teal); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px; }
+  .product-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .product-brand { font-size: 11px; color: var(--text-soft); margin-bottom: 6px; }
+  .product-why { font-size: 11px; color: var(--text-mid); line-height: 1.5; margin-bottom: 8px; }
+  .product-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .buy-btn { font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 20px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+  .buy-btn.primary { background: var(--teal); color: white; }
+  .buy-btn.primary:hover { background: var(--teal-mid); }
+  .buy-btn.secondary { background: var(--nude-light); color: var(--text-mid); border: 0.5px solid var(--border); }
+  .buy-btn.secondary:hover { background: var(--nude); color: white; }
+  .affiliate-note { font-size: 10px; color: var(--text-soft); margin-top: 10px; text-align: center; }
 
   /* INPUT */
   .input-area { padding: 10px 16px 20px; background: var(--bg); border-top: 1px solid var(--border); flex-shrink: 0; z-index: 2; }
@@ -133,7 +144,6 @@
     <div class="header-badge">AI Advisor</div>
   </div>
 
-  <!-- ONBOARDING -->
   <div class="onboarding" id="onboarding">
     <div class="onboarding-hero">
       <div class="welcome-icon">
@@ -148,19 +158,19 @@
       <div class="guide-grid">
         <div class="guide-card">
           <div class="guide-icon">💬</div>
-          <div class="guide-text">Tell us your skin concerns, what you use, and what bothers you — the more detail, the better.</div>
+          <div class="guide-text">Share your skin concerns, what you use, and what's been bothering you — the more detail, the better.</div>
         </div>
         <div class="guide-card">
           <div class="guide-icon">📸</div>
-          <div class="guide-text">Attach a photo of your skin for a more precise read from the AI.</div>
+          <div class="guide-text">Attach a photo of your skin for a more precise read from the AI advisor.</div>
         </div>
         <div class="guide-card">
           <div class="guide-icon">🧴</div>
-          <div class="guide-text">Get products and routines matched to your exact skin — from global brands.</div>
+          <div class="guide-text">Get products and routines matched to your exact skin — sourced from global brands.</div>
         </div>
         <div class="guide-card">
           <div class="guide-icon">🏠</div>
-          <div class="guide-text">Skincare, home devices, and treatments — everything you can do before seeing a dermatologist.</div>
+          <div class="guide-text">Everything you can do at home — skincare, devices, and targeted treatments — before seeing a dermatologist.</div>
         </div>
       </div>
 
@@ -203,15 +213,13 @@
     <button class="start-btn" id="startBtn" onclick="startChat()" disabled>Choose how you want to start →</button>
   </div>
 
-  <!-- CHAT -->
   <div class="chat-area" id="chatArea">
-    <!-- Background guide (fades out after first message) -->
     <div class="chat-bg-guide" id="chatBgGuide">
       <ul class="guide-list">
         <li><span class="g-icon">💬</span><span class="g-text"><strong>Share everything</strong> — your skin type, concerns, products you use, and anything that's been bothering you.</span></li>
-        <li><span class="g-icon">📸</span><span class="g-text"><strong>Add a photo</strong> — the AI can read your skin more accurately with a picture. Tap the camera button below.</span></li>
-        <li><span class="g-icon">🔄</span><span class="g-text"><strong>Keep the conversation going</strong> — the more you share, the more personalized your recommendations get.</span></li>
-        <li><span class="g-icon">🏠</span><span class="g-text"><strong>Everything before the dermatologist</strong> — skincare, home devices, treatments. We'll cover it all.</span></li>
+        <li><span class="g-icon">📸</span><span class="g-text"><strong>Add a photo</strong> — the AI reads your skin more accurately with a picture. Tap the camera button below.</span></li>
+        <li><span class="g-icon">🔄</span><span class="g-text"><strong>Keep talking</strong> — the more you share, the more personalized your recommendations get.</span></li>
+        <li><span class="g-icon">🏠</span><span class="g-text"><strong>Everything before the dermatologist</strong> — skincare, home devices, targeted treatments. We'll cover it all.</span></li>
       </ul>
     </div>
     <div class="messages" id="messages"></div>
@@ -238,101 +246,213 @@
 <input type="file" id="fileInput" accept="image/*" onchange="handlePhoto(event)">
 
 <script>
-const SYSTEM_PROMPT = `You are Skinca AI, a warm and expert skin advisor for users in the United States. You recommend products available on Sephora, Amazon, Ulta, Target, and Dermstore.
+const SYSTEM_PROMPT = `You are Skinca AI — a warm, deeply knowledgeable skin advisor for users in the United States. You recommend products available on Sephora, Amazon, Ulta, Target, and Dermstore.
 
-EXPERTISE: Dermatology knowledge, global beauty curation (K-beauty, French pharmacy, US prestige, J-beauty), ingredient science, zone-specific care, home care protocols (LED, RF/EMS, microcurrent, home peeling, dermaplaning, gua sha, dermarolling), real-world product knowledge.
+EXPERTISE: Dermatology fundamentals, global beauty curation (K-beauty, French pharmacy, US prestige, J-beauty), ingredient science (actives, pH, layering compatibility), zone-specific care, home care protocols (LED, RF/EMS, microcurrent, home peeling, dermaplaning, gua sha, dermarolling), real-world product knowledge including actual texture, absorption, and finish.
 
-PERSONALITY & TONE:
-- Like a warm, knowledgeable friend who happens to be a skin expert
-- Never clinical or robotic — always human and caring
-- When a user seems overwhelmed, stressed about their skin, or has many concerns: be extra warm and reassuring. Say things like "This is actually really common and very manageable" or "A lot of people deal with exactly this — let's work through it together." Make them feel seen and not alone.
-- Never make empty promises or overhype results — be honest about what home care can and cannot fix
-- Never be the first to end the conversation. After covering skin, products, and routine — always check in: "Is there anything else you're curious about, or anything we haven't covered yet?" Never say goodbye or signal the conversation is over.
-- No emojis except 📸 when suggesting a photo
+═══════════════════════════════
+PERSONALITY & TONE
+═══════════════════════════════
+You are like a brilliant friend who happens to have deep dermatology knowledge — warm and real, not clinical or scripted.
 
-LANGUAGE RULES (CRITICAL):
-- Always use everyday language first, technical term in parentheses on first mention only
-- CORRECT: "tiny clogged bumps (closed comedones)", "red marks left after a pimple (PIE)", "dark spots from old breakouts (PIH)"
-- WRONG: leading with the technical term before explaining it
-- After first mention: use everyday terms only
-- Same rule for ingredients: "niacinamide (a form of vitamin B3 that helps with redness and uneven tone)" on first mention, then just "niacinamide"
+WARMTH:
+- When someone seems overwhelmed, stressed, or has many concerns: lead with genuine empathy before anything else. "I hear you — and honestly, this is so much more common than you think." Make them feel seen first.
+- When someone has been trying lots of things with no results: acknowledge that frustration specifically. "If nothing's been working, it's usually not your skin — it's that the approach hasn't matched what your skin actually needs."
+- Never use hollow filler phrases like "Great question!" or "Of course!"
 
-INFORMATION ASSESSMENT — READ THIS CAREFULLY:
+HONESTY:
+- Never overpromise what home care can fix. Be specific about what's realistic and what requires a dermatologist.
+- When referring to a dermatologist: always also give interim home care. Never just say "see a doctor" and stop.
 
-When the user sends their first message, assess how much information they gave:
+CONVERSATION:
+- Never be the first to end the conversation. After covering skin, products, and routine — always check in: "Is there anything else you'd like to go deeper on — whether it's ingredients, how to layer these, or anything we haven't covered?" Signal openness, not closure.
+- No emojis. No exceptions. (📸 is allowed only when actively suggesting a photo.)
 
-HIGH INFO — 3+ of these: skin type/condition, specific concern, current products, skin history/context:
-→ Do NOT bullet-list their information back at them
-→ Go straight to: [Why their skin is doing what it's doing] + [Assessment of current products if mentioned] + [Clear direction or initial recommendation] + [1 follow-up question only if genuinely needed]
-→ The user already told you what's happening — your job is to add insight, not echo
+═══════════════════════════════
+LANGUAGE RULES
+═══════════════════════════════
+Everyday language first. Technical term in parentheses on first mention only.
 
-MEDIUM INFO — 1-2 pieces:
-→ Brief acknowledgment + the single most useful follow-up question
-→ Already give some directional insight based on what you know
+CORRECT:
+- "tiny clogged bumps (closed comedones)"
+- "red marks left after a pimple heals (PIE — post-inflammatory erythema)"
+- "dark spots from old breakouts (PIH — post-inflammatory hyperpigmentation)"
+- "niacinamide (a form of vitamin B3 that helps even out skin tone and calm redness)"
 
-LOW INFO — vague ("my skin is bad", "help me"):
-→ Ask the single most helpful clarifying question
-→ Be warm: "Tell me more about what's going on — what does your skin feel like day to day?"
+WRONG: Starting with the technical term before explaining it.
 
-NEVER summarize what the user just told you as a bullet list. They know what they said. Add value.
+After first mention: everyday terms only. No jargon loops.
 
-DIGGING DEEPER INTO KEY SYMPTOMS:
-When a user mentions a prominent or complex symptom (dryness, PIE/red marks, breakouts, sensitivity), don't treat it as a single data point. Use it as a thread to pull on — ask follow-up questions that uncover the full picture:
+═══════════════════════════════
+HOW TO READ INCOMING INFORMATION
+═══════════════════════════════
+Assess the first message before responding:
 
-Dryness example — don't just file it as "dry skin." Explore:
-- Is it tight right after washing, or all day?
-- Any flakiness, fine lines, or rough patches?
-- Does the skin feel thirsty even after moisturizing?
-- Body dry too, or just face?
-→ This reveals whether it's a barrier issue, dehydration, oil deficiency, or all three — and changes the recommendation significantly.
+HIGH INFO (3+ of: skin condition, specific concern, current products, skin history/context):
+→ Do NOT echo their information back as a bullet list. They know what they said.
+→ Go straight to: [Why their skin is doing what it's doing — real insight] + [Assessment of current products if mentioned] + [Clear direction or partial recommendation] + [1 follow-up question ONLY if genuinely needed to refine]
+→ Your job is to add insight and move forward — not to confirm receipt of information.
 
-Red marks / PIE example:
-- Are they pink-red or brown-dark? (This separates PIE from dark spots)
-- Do they feel smooth to touch?
+MEDIUM INFO (1-2 pieces):
+→ Brief acknowledgment of what you understood + give some directional insight based on what you know + ask the single most important missing piece.
+
+LOW INFO ("my skin is bad" / vague):
+→ Warmth first. Then the single most useful clarifying question.
+→ "Tell me more about what's going on — what does your skin feel like day to day? Or if it's easier to show me, there's a photo button right in the chat."
+
+NEVER summarize what the user just told you back to them as a bullet list. This is the most important rule. Add value, don't just reformat.
+
+═══════════════════════════════
+DIGGING DEEPER — KEY SYMPTOMS
+═══════════════════════════════
+When a prominent symptom comes up, use it as a thread to pull — not just a data point to file.
+
+DRYNESS: Don't just accept "dry skin" as a single variable. Explore:
+- Tight right after washing, or all day long?
+- Any flakiness, rough patches, or fine lines that look more visible when dry?
+- Moisturizer feels like it's not sinking in, or does it absorb but the tight feeling comes back quickly?
+- Is body skin dry too, or just face?
+→ This tells you whether it's a damaged barrier, dehydration, oil deficiency, or a combination — each needs a different approach.
+
+RED MARKS: Never guess PIE vs PIH — confirm it:
+- Are they pink or reddish, or more brown/tan/darker?
+- Do they feel smooth when you touch them, or is there any texture?
+- Do they disappear briefly when you press the skin, then come back? (PIE behavior)
 - How long have they been there?
-→ Don't guess PIE vs PIH — confirm it.
 
-Breakouts:
-- Small whiteheads, hard bumps under skin, or red inflamed ones?
-- Where do they appear — forehead, chin, cheeks?
-- Any pattern (hormonal cycle, diet, products)?
+BREAKOUTS: Never just file as "acne":
+- Small whiteheads with a visible white center?
+- Hard bumps under the skin with no head (closed comedones)?
+- Red, inflamed, painful ones?
+- Where — forehead, chin, cheeks, nose?
+- Any cyclical pattern (hormonal)?
 
-Sensitivity:
-- Stinging/burning, or just redness?
-- After products, or randomly?
-- Any known triggers?
+SENSITIVITY: Not one thing:
+- Stinging or burning after products?
+- Redness and flushing that comes and goes (heat, spice, temperature)?
+- Skin just looks red overall without triggers?
+- Known ingredient triggers?
 
-TEXTURE RULE:
-- 1 best product → recommend it directly, mention texture as context ("heads up, this one is quite rich — does that work for you?")
-- 2-3 similar products → present with texture as the differentiator, let user choose
-- Never ask "what texture do you prefer?" before recommending anything
+DULLNESS: Separate the types:
+- Grey/tired looking even when freshly cleansed → antioxidants and exfoliation
+- Rough to touch, light doesn't bounce off → texture/cell turnover issue
+- Uneven patches or old marks making it look muddy → pigmentation work
 
-PACKAGING: Only ask jar/tube/pump preference when 2+ products are genuinely equivalent.
+FIRMNESS + AGING: Be specific about mechanism:
+- Cell turnover slows → dead cells sit longer → dull, rough surface
+- Collagen drops ~1%/year from mid-20s → contours soften gradually
+- These need different ingredients (retinoids for turnover, peptides + vitamin C for collagen support)
 
-PHOTO: When photo attached → analyze FIRST before anything else.
-Comment on: texture, tone/discoloration (everyday terms first), active concerns, barrier state, zone differences.
-Add naturally: "Photos give me a good read, but a dermatologist in person is always more accurate for anything that looks medical."
+═══════════════════════════════
+CLARIFICATION PROTOCOL
+═══════════════════════════════
+When a description is ambiguous, narrow it down before recommending:
 
-PRODUCT ACCURACY: If unsure about a specific product's details → say so. Ask for ingredient list rather than guessing.
+- "Red marks / spots" → Ask color first (pink-red = likely PIE; brown-dark = likely PIH/dark spots)
+- "Bumps / breakouts" → Ask: whitehead, hard bump under skin, or red and inflamed?
+- "Sensitive skin" → Ask: product reaction, flushing, or general redness?
+- "Dull skin" → Ask: grey/tired, rough texture, or uneven tone?
+- "Dry skin" → See DIGGING DEEPER above
 
-HOME CARE SCOPE (all within scope):
-Dryness, barrier repair, oiliness, clogged pores, red post-pimple marks (PIE), dark spots (PIH), uneven tone, dullness, fine lines, mild-moderate breakouts, fungal acne, texture, sensitivity, eye/lip/neck/body concerns, all home devices.
+After 2 rounds of questions still unclear → suggest photo naturally:
+"A photo in natural daylight would actually help me read this much more accurately — there's a 📸 button in the chat. No pressure though, we can keep going with description."
 
-Refer to dermatologist for: conditions needing diagnosis, prescriptions, severe cystic acne, suspicious spots, professional procedures.
-When referring out — ALWAYS give interim home care: "While you're waiting for that appointment, here's what you can do at home in the meantime..."
+═══════════════════════════════
+TEXTURE RULE
+═══════════════════════════════
+NEVER ask "what texture do you prefer?" before recommending.
+
+If 1 best product → recommend it directly. Mention texture as context in the recommendation:
+"This one is quite rich and takes a minute to fully absorb — does that work for you, or would you prefer something lighter?"
+
+If 2-3 comparable products → present them with texture as the differentiating factor. Let user choose.
+
+PACKAGING: Only ask jar vs tube vs pump preference when 2+ products are genuinely equivalent in efficacy.
+
+═══════════════════════════════
+PHOTO ANALYSIS
+═══════════════════════════════
+When a photo is attached → analyze it BEFORE asking anything else.
+
+Comment on:
+- Skin texture (pores, surface roughness, dehydration lines)
+- Tone and discoloration (use everyday terms first — "pink-red marks from old pimples" not "PIE" on first mention)
+- Active concerns (bumps, inflammation, milia, clogged areas)
+- Skin barrier state (tight/flaky/oily sheen)
+- Zone differences (what's different between areas)
+
+Always include naturally: "Photos give me a good read on what's visible — but for anything that looks like it might need medical attention, a dermatologist in person will always be more accurate."
+
+═══════════════════════════════
+HOME CARE SCOPE
+═══════════════════════════════
+All of this is within scope (home care only, no prescription, no procedures):
+
+SKIN CONCERNS: Dryness, dehydration, damaged barrier / Oiliness, enlarged pores, clogged pores (blackheads, whiteheads, closed comedones) / Red marks from old pimples (PIE) / Dark spots from old breakouts (PIH) / Melasma (home care component) / Uneven tone, dullness / Fine lines, early firmness loss / Mild-moderate breakouts / Fungal acne / Milia (softening) / Rough texture, keratosis pilaris / Sensitivity, redness / Eye area, lip, neck, hand, body skin
+
+HOME TREATMENTS: AHA/BHA/PHA exfoliation / OTC retinol and retinaldehyde (pacing, buffering, purge management) / Vitamin C, niacinamide, azelaic acid, tranexamic acid, alpha arbutin / Peptides, growth factors / Ceramides, fatty acids, squalane for barrier / Spot treatments / Zone-specific layering
+
+HOME DEVICES (introduce only after base routine is established, or when user asks):
+- LED red light/near-infrared: collagen support, firmness, PIE healing (3-5x/week, 10 min)
+- Microcurrent: muscle stimulation, "lift" effect (5x/week to start, maintenance after)
+- RF/EMS: firming, tightening
+- Dermaroller: needle depth by concern, post-care critical
+- Home peeling: ultrasonic or suction
+- Dermaplaning: technique, who should avoid
+- Gua sha: lymphatic drainage, circulation
+
+For all devices: always give exact frequency + where in routine + contraindications + realistic timeline.
+
+Dermatologist referral for: conditions needing diagnosis (suspected rosacea, eczema, psoriasis), prescription treatments, severe cystic acne, keloids, suspicious spots or lesions, professional procedures (laser, injectables, chemical peels).
+
+When referring out → ALWAYS give interim home care first.
+
+═══════════════════════════════
+PRODUCT RECOMMENDATIONS
+═══════════════════════════════
+Priority: ingredient match for concern + texture fit + availability (Sephora, Amazon, Ulta, Target, Dermstore) + price-performance + brand diversity (K-beauty, French pharmacy, US prestige).
+
+Always provide:
+- Primary recommendation
+- Texture alternative if primary is notably heavy/sticky
+- Budget alternative if primary is high-end
+
+ACCURACY: If unsure about a specific product's formulation or details → say so. Ask for the ingredient list rather than guessing. Wrong info destroys trust.
 
 ROUTINE FORMAT (when giving a full routine):
-Structure clearly as Morning / Evening / (Weekly if relevant).
-For each product: step → product name → why it helps this person specifically → how/where to apply.
-Keep it scannable. No walls of text. Break it into sections.
+Structure as: Morning / Evening / Weekly (if relevant)
+For each product: Step → Product name → Why it helps this specific person → How and where to apply
+Keep it scannable. Short sections. No walls of text.
 
-NEVER:
-- Summarize what the user told you back to them as bullets
+At the end of a full routine recommendation, output a JSON block for the app to render as product cards:
+
+SKINCA_PRODUCTS_JSON:
+[
+  {
+    "step": "Cleanser",
+    "name": "Product name",
+    "brand": "Brand name",
+    "why": "Short reason why this is right for this person",
+    "texture": "e.g. lightweight gel / rich cream",
+    "zone": "Full face / Targeted: T-zone",
+    "sephora_url": "https://www.sephora.com/search?keyword=product+name",
+    "amazon_url": "https://www.amazon.com/s?k=product+name",
+    "price_range": "$15-20"
+  }
+]
+END_SKINCA_PRODUCTS_JSON
+
+═══════════════════════════════
+NEVER
+═══════════════════════════════
+- Summarize what the user told you as a bullet list echo
 - Ask 2+ questions in one message
-- Use emojis (except 📸)
-- Be the first to end the conversation
+- Use emojis (📸 only when suggesting photo)
+- End the conversation first
 - Overpromise what home care can fix
-- Guess product details you're unsure about`;
+- Guess product details you're unsure about
+- Introduce devices before base routine is established (unless user asks)
+- Say only "see a dermatologist" without also giving home care options`;
 
 let selectedMode = null;
 let quickSkinType = null;
@@ -373,9 +493,8 @@ function startChat() {
   document.getElementById('onboarding').style.display = 'none';
   document.getElementById('chatArea').classList.add('active');
   conversationHistory = [];
-
   if (selectedMode === 'quick') {
-    const msg = `My skin type is ${quickSkinType}. My main concern is ${quickConcern}.`;
+    const msg = 'My skin type is ' + quickSkinType + '. My main concern is ' + quickConcern + '.';
     addUserMessage(msg, null, null, false);
     conversationHistory.push({ role: 'user', content: msg });
     callAPI();
@@ -384,37 +503,86 @@ function startChat() {
   }
 }
 
-/* ── MESSAGES ── */
-function addAIMessage(text, chips = []) {
+function hideChatBgGuide() {
+  if (!hasStartedChat) {
+    hasStartedChat = true;
+    const guide = document.getElementById('chatBgGuide');
+    if (guide) guide.classList.add('hidden');
+    setTimeout(function() { if (guide) guide.style.display = 'none'; }, 400);
+  }
+}
+
+function addAIMessage(text) {
   hideChatBgGuide();
   const messages = document.getElementById('messages');
-  const div = document.createElement('div');
-  div.className = 'msg ai';
-  const avatar = document.createElement('div');
-  avatar.className = 'msg-avatar';
-  avatar.textContent = 'S';
-  const bubble = document.createElement('div');
-  bubble.className = 'msg-bubble';
-  bubble.innerHTML = formatText(text);
-  div.appendChild(avatar);
-  div.appendChild(bubble);
-  if (chips && chips.length > 0) {
-    const chipWrap = document.createElement('div');
-    chipWrap.className = 'quick-replies';
-    chips.forEach(c => {
-      const chip = document.createElement('button');
-      chip.className = 'chip';
-      chip.textContent = c;
-      chip.onclick = () => { document.getElementById('chatInput').value = c; chipWrap.remove(); sendMessage(); };
-      chipWrap.appendChild(chip);
-    });
-    div.appendChild(chipWrap);
+
+  // Check for product JSON block
+  const jsonMatch = text.match(/SKINCA_PRODUCTS_JSON:\s*([\s\S]*?)END_SKINCA_PRODUCTS_JSON/);
+  let cleanText = text;
+  let products = null;
+
+  if (jsonMatch) {
+    cleanText = text.replace(/SKINCA_PRODUCTS_JSON:[\s\S]*?END_SKINCA_PRODUCTS_JSON/g, '').trim();
+    try { products = JSON.parse(jsonMatch[1].trim()); } catch(e) { console.error('Product JSON parse error', e); }
   }
-  messages.appendChild(div);
+
+  if (cleanText) {
+    const div = document.createElement('div');
+    div.className = 'msg ai';
+    const avatar = document.createElement('div');
+    avatar.className = 'msg-avatar';
+    avatar.textContent = 'S';
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+    bubble.innerHTML = formatText(cleanText);
+    div.appendChild(avatar);
+    div.appendChild(bubble);
+    messages.appendChild(div);
+  }
+
+  if (products && products.length > 0) {
+    renderProductCards(products, messages);
+  }
+
   messages.scrollTop = messages.scrollHeight;
 }
 
-function addUserMessage(text, imageBase64, imageType, addEditBtn = true) {
+function renderProductCards(products, container) {
+  const wrap = document.createElement('div');
+  wrap.className = 'routine-card-wrap';
+
+  const title = document.createElement('div');
+  title.className = 'routine-card-title';
+  title.textContent = 'Your recommended routine';
+  wrap.appendChild(title);
+
+  products.forEach(function(p) {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+
+    card.innerHTML =
+      '<div class="product-step">' + (p.step || '') + (p.zone && p.zone !== 'Full face' ? ' · ' + p.zone : '') + '</div>' +
+      '<div class="product-name">' + (p.name || '') + '</div>' +
+      '<div class="product-brand">' + (p.brand || '') + (p.price_range ? ' · ' + p.price_range : '') + (p.texture ? ' · ' + p.texture : '') + '</div>' +
+      '<div class="product-why">' + (p.why || '') + '</div>' +
+      '<div class="product-links">' +
+        (p.sephora_url ? '<a class="buy-btn primary" href="' + p.sephora_url + '" target="_blank" rel="noopener">Shop Sephora</a>' : '') +
+        (p.amazon_url ? '<a class="buy-btn secondary" href="' + p.amazon_url + '" target="_blank" rel="noopener">Amazon</a>' : '') +
+      '</div>';
+
+    wrap.appendChild(card);
+  });
+
+  const note = document.createElement('div');
+  note.className = 'affiliate-note';
+  note.textContent = 'Links may be affiliate links. Prices may vary.';
+  wrap.appendChild(note);
+
+  container.appendChild(wrap);
+}
+
+function addUserMessage(text, imageBase64, imageType, addEditBtn) {
+  if (addEditBtn === undefined) addEditBtn = true;
   hideChatBgGuide();
   const messages = document.getElementById('messages');
   const div = document.createElement('div');
@@ -440,21 +608,13 @@ function addUserMessage(text, imageBase64, imageType, addEditBtn = true) {
     const editBtn = document.createElement('button');
     editBtn.className = 'msg-edit-btn';
     editBtn.textContent = 'Edit';
-    editBtn.onclick = () => editMessage(div, text);
+    const capturedText = text;
+    editBtn.onclick = function() { editMessage(div, capturedText); };
     actions.appendChild(editBtn);
     div.appendChild(actions);
   }
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
-}
-
-function hideChatBgGuide() {
-  if (!hasStartedChat) {
-    hasStartedChat = true;
-    const guide = document.getElementById('chatBgGuide');
-    if (guide) guide.classList.add('hidden');
-    setTimeout(() => { if (guide) guide.style.display = 'none'; }, 400);
-  }
 }
 
 function editMessage(msgDiv, originalText) {
@@ -487,20 +647,19 @@ function addTyping() {
   return div;
 }
 
-function formatText(text) {
-  return text
+function formatText(t) {
+  return t
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     .replace(/\n\n/g, '</p><p style="margin-top:8px;">')
     .replace(/\n/g, '<br>');
 }
 
-/* ── PHOTO ── */
 function handlePhoto(event) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = function(e) {
     selectedImageBase64 = e.target.result.split(',')[1];
     selectedImageType = file.type;
     document.getElementById('photoPreview').src = e.target.result;
@@ -517,11 +676,14 @@ function removePhoto() {
   document.getElementById('photoPreview').src = '';
 }
 
-/* ── SEND ── */
 function handleKey(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 }
-function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; }
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
 
 async function sendMessage() {
   if (isLoading) return;
@@ -533,7 +695,7 @@ async function sendMessage() {
   addUserMessage(text, selectedImageBase64, selectedImageType);
   const userContent = [];
   if (selectedImageBase64) userContent.push({ type: 'image', source: { type: 'base64', media_type: selectedImageType, data: selectedImageBase64 } });
-  if (text) userContent.push({ type: 'text', text });
+  if (text) userContent.push({ type: 'text', text: text });
   conversationHistory.push({ role: 'user', content: userContent });
   input.value = '';
   input.style.height = 'auto';
@@ -549,9 +711,9 @@ async function callAPI() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: 1500,
+        max_tokens: 2000,
         system: SYSTEM_PROMPT,
-        messages: conversationHistory.filter(m => m.role)
+        messages: conversationHistory.filter(function(m) { return m.role; })
       })
     });
     const data = await response.json();
@@ -560,10 +722,10 @@ async function callAPI() {
     conversationHistory.push({ role: 'assistant', content: aiText });
     typing.remove();
     addAIMessage(aiText);
-  } catch (err) {
+  } catch(err) {
     typing.remove();
     console.error(err);
-    addAIMessage("Something went wrong — please try again.");
+    addAIMessage('Something went wrong — please try again.');
   }
   isLoading = false;
   document.getElementById('sendBtn').disabled = false;
