@@ -141,7 +141,10 @@
 <div class="app">
   <div class="header">
     <div class="logo">Skinca</div>
-    <div class="header-badge">AI Advisor</div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <div id="locationBadge" style="display:none; align-items:center; gap:4px; background:var(--bg2); color:var(--text-soft); font-size:11px; padding:4px 10px; border-radius:20px;">📍</div>
+      <div class="header-badge">AI Advisor</div>
+    </div>
   </div>
 
   <div class="onboarding" id="onboarding">
@@ -158,7 +161,7 @@
       <div class="guide-grid">
         <div class="guide-card">
           <div class="guide-icon">💬</div>
-          <div class="guide-text">Share your skin concerns, what you use, and what's been bothering you — the more detail, the better.</div>
+          <div class="guide-text">Share your skin concerns, current products, and where you spend most of your time (office, outdoors, etc.).</div>
         </div>
         <div class="guide-card">
           <div class="guide-icon">📸</div>
@@ -170,7 +173,7 @@
         </div>
         <div class="guide-card">
           <div class="guide-icon">🏠</div>
-          <div class="guide-text">Everything you can do at home — skincare, devices, and targeted treatments — before seeing a dermatologist.</div>
+          <div class="guide-text">Everything you can do at home — skincare, devices, and treatments — before seeing a dermatologist.</div>
         </div>
       </div>
 
@@ -504,6 +507,42 @@ let selectedImageBase64 = null;
 let selectedImageType = null;
 let isLoading = false;
 let hasStartedChat = false;
+let locationContext = ''; // 위치/날씨 컨텍스트
+
+// 위치 자동 감지
+async function detectLocation() {
+  if (!navigator.geolocation) return;
+  try {
+    const pos = await new Promise((res, rej) =>
+      navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 })
+    );
+    const { latitude, longitude } = pos.coords;
+    // OpenWeatherMap 무료 API (api key 없이 기본 지오코딩만 사용)
+    const geoRes = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+    );
+    const geoData = await geoRes.json();
+    const city = geoData.address?.city || geoData.address?.town || geoData.address?.state || '';
+    const state = geoData.address?.state || '';
+    const country = geoData.address?.country || '';
+    if (city || state) {
+      const now = new Date();
+      const month = now.getMonth() + 1;
+      const season = month >= 3 && month <= 5 ? 'spring' :
+                     month >= 6 && month <= 8 ? 'summer' :
+                     month >= 9 && month <= 11 ? 'fall' : 'winter';
+      locationContext = `The user is located in ${city}${state ? ', ' + state : ''}, ${country}. Current season: ${season}.`;
+      // 헤더에 위치 표시
+      const badge = document.getElementById('locationBadge');
+      if (badge) { badge.textContent = city || state; badge.style.display = 'flex'; }
+    }
+  } catch(e) {
+    // 위치 거부 또는 실패 — 조용히 넘어감
+  }
+}
+
+// 페이지 로드 시 위치 감지 시도
+window.addEventListener('load', detectLocation);
 
 function selectMode(mode) {
   selectedMode = mode;
@@ -747,14 +786,15 @@ async function sendMessage() {
 
 async function callAPI() {
   const typing = addTyping();
+  const systemWithLocation = SYSTEM_PROMPT + (locationContext ? '\n\nUSER LOCATION & SEASON (auto-detected — do not ask again): ' + locationContext : '');
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
-        max_tokens: 2000,
-        system: SYSTEM_PROMPT,
+        max_tokens: 3000,
+        system: systemWithLocation,
         messages: conversationHistory.filter(function(m) { return m.role; })
       })
     });
